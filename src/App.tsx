@@ -1,13 +1,11 @@
-import React from 'react';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-
 
 function App() {
   return (
     <Router basename="/">
-        <Routes>
-          <Route></Route>
-        </Routes>
+      <Routes>
+        <Route></Route>
+      </Routes>
     </Router>
   );
 }
