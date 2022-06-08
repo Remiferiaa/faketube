@@ -50,3 +50,5 @@ const dateDiff = (x: string) => {
         else { return '1 year ago' }
     }
 }
+
+export default dateDiff
