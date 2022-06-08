@@ -10,7 +10,6 @@ const base = 'https://www.googleapis.com/youtube/v3/'
 'https://www.googleapis.com/youtube/v3/[channels]?part=snippet,statistics&id=[id]&fields=items(items(id,snippet(title,thumbnails),statistics))&key=[YOUR_API_KEY]' // channel detail
 'https://www.googleapis.com/youtube/v3/[commentThreads]?part=snippet&maxResults=[50]&order=relevance&videoId=[id]key=[YOUR_API_KEY]' //comment
 'https://www.googleapis.com/youtube/v3/[search]?part=snippet&relatedToVideoId=[id]&type=video&key=[YOUR_API_KEY]' //related to current video
-
 // link 1 to get homepage videos
 // link 2 get search list id, link 3 to get details
 // link 3 also can get specific video, link 4 get that channel detail, link 5 for comments, link 6 for related videos */
@@ -21,11 +20,10 @@ interface Opts {
 }  
 
 const useLink = (opts: Opts) => {
-    const [data, setData] = useState([]);
-    const [done, setDone]  = useState<boolean>(false)
+    const [data, setData] = useState<any>([])
+    const [done, setDone] = useState<boolean>(false)
     const query = new URLSearchParams(opts.params).toString()
     const url = `${base}${opts.type}?${query}&key=${key}`
-
     const fetcher = async () => {
         try {
             const details = await fetch(url)
