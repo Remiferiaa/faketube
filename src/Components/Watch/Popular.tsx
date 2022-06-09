@@ -17,21 +17,44 @@ const queries = {
     }
 }
 
+interface IList {
+    items: [{
+        id: string
+        snippet: {
+            title: string
+            channelId: string
+            publishedAt: string
+            thumbnails: {
+                medium: {
+                    url: string
+                }
+            }
+            channelTitle: string
+        }
+        contentDetails: {
+            duration: string
+        }
+        statistics: {
+            viewCount: number
+        }
+    }]
+    nextPageToken: string
+}
 
 const Popular = () => {
     const { data, done } = useLink(queries)
-    const [list, setList] = useState<any>(null)
+    const [list, setList] = useState<IList | null>(null)
 
     useEffect(() => {
         if (done) {
             setList(data)
         }
-    }, [done])
+    }, [data])
 
     const display = () => {
         return (
             <>
-                {list?.items.map((item: any) => {
+                {list?.items.map((item) => {
                     return (
                         <div key={item.id}>
                             <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>

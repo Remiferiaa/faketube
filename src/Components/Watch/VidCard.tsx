@@ -1,6 +1,20 @@
 import { useState, useEffect } from 'react'
 import useLink from '../../Data/useLink'
 
+interface IVid {
+    items: [{
+        snippet: {
+            thumbnails: {
+                medium: {
+                    url: string
+                }
+            }
+        }
+    }]
+}
+
+
+
 const Card = ({chId}: any) => {
     const query = {
         type: 'channels',
@@ -10,7 +24,7 @@ const Card = ({chId}: any) => {
         }
     }
 
-    const [vidData, setVid] = useState<any>()
+    const [vidData, setVid] = useState<IVid | null>(null)
     const { data, done } = useLink(query)
     useEffect(() => {
         if (done) {
