@@ -1,12 +1,15 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Popular from "./Components/Watch/Popular";
+import Header from "./Components/Header/Head";
+import Result from "./Components/Search/Results";
 
 function App() {
   return (
     <Router basename="/">
-      <Popular/>
+      <Header />
       <Routes>
-        <Route></Route>
+        <Route path="/" element={<Popular />}></Route>
+        <Route path="/results" element={<Result />}></Route>
       </Routes>
     </Router>
   );

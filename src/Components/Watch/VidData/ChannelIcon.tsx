@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import useLink from '../../Data/useLink'
+import useLink from '../../../Hook/useLink'
 
-interface IVid {
+interface ICh {
     items: [{
         snippet: {
             thumbnails: {
@@ -13,9 +13,12 @@ interface IVid {
     }]
 }
 
+interface Props {
+    chId: string,
+}
 
 
-const Card = ({chId}: any) => {
+const ChIcon = ({chId}: Props) => {
     const query = {
         type: 'channels',
         params: {
@@ -24,21 +27,21 @@ const Card = ({chId}: any) => {
         }
     }
 
-    const [vidData, setVid] = useState<IVid | null>(null)
+    const [chData, setCh] = useState<ICh | null>(null)
     const { data, done } = useLink(query)
     useEffect(() => {
         if (done) {
-            setVid(data)
+            setCh(data)
         }
     }, [done])
 
     return (
         <>
             {done ?
-                <img src={vidData?.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                <img src={chData?.items[0].snippet.thumbnails.medium.url} alt=""></img>
             : null}
         </>
     )
 }
 
-export default Card
+export default ChIcon

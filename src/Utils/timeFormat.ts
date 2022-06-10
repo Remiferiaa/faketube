@@ -6,7 +6,7 @@ const timeFormat = (timer: number) => {
     return `${getHours} : ${getMinutes} : ${getSeconds}`
 }
 
-const time = (dura: string) => {
+const vidDuration = (dura: string) => {
     const pattern = /(?:([\d]+)D)?T(?:([\d]+)H)?(?:([\d]+)M)?(?:([\d]+)S)/
     const groups = dura.match(pattern)
     if (groups !== null) {
@@ -19,4 +19,4 @@ const time = (dura: string) => {
     }
 }
 
-export default time
+export default vidDuration

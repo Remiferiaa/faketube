@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import useLink from '../../Data/useLink'
+import useLink from '../../Hook/useLink'
 import dateDiff from '../../Utils/dateFormat'
 import { viewForm } from '../../Utils/numFormat'
-import time from '../../Utils/timeFormat'
-import Card from './VidCard'
+import vidDuration from '../../Utils/timeFormat'
+import ChIcon from './VidData/ChannelIcon'
+import { IList } from '../../types/vid'
 
-//'https://www.googleapis.com/youtube/v3/[videos]?part=snippet,contentDetails&chart=mostPopular&maxResults=[24]&fields=items(id,snippet)&key=[apikey]' 
 const queries = {
     type: 'videos',
     params: {
@@ -17,29 +17,7 @@ const queries = {
     }
 }
 
-interface IList {
-    items: [{
-        id: string
-        snippet: {
-            title: string
-            channelId: string
-            publishedAt: string
-            thumbnails: {
-                medium: {
-                    url: string
-                }
-            }
-            channelTitle: string
-        }
-        contentDetails: {
-            duration: string
-        }
-        statistics: {
-            viewCount: number
-        }
-    }]
-    nextPageToken: string
-}
+
 
 const Popular = () => {
     const { data, done } = useLink(queries)
@@ -49,7 +27,7 @@ const Popular = () => {
         if (done) {
             setList(data)
         }
-    }, [data])
+    }, [done])
 
     const display = () => {
         return (
@@ -58,9 +36,9 @@ const Popular = () => {
                     return (
                         <div key={item.id}>
                             <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                            <p>{time(item.contentDetails.duration)}</p>
+                            <p>{vidDuration(item.contentDetails.duration)}</p>
                             <div>
-                                <Card chId={item.snippet.channelId} />
+                                <ChIcon chId={item.snippet.channelId}/>
                                 <div>
                                     <h1>{item.snippet.title}</h1>
                                     <p>{item.snippet.channelTitle}</p>
