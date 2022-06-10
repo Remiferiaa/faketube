@@ -41,7 +41,7 @@ const Result = () => {
         if (done) {
             setResult(data)
         }
-    }, [done])
+    }, [data, done])
     console.log(results)
 
     return (

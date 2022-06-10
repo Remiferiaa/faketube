@@ -33,7 +33,7 @@ const ChIcon = ({chId}: Props) => {
         if (done) {
             setCh(data)
         }
-    }, [done])
+    },  [data, done])
 
     return (
         <>

@@ -27,7 +27,7 @@ const Popular = () => {
         if (done) {
             setList(data)
         }
-    }, [done])
+    },  [data, done])
 
     const display = () => {
         return (

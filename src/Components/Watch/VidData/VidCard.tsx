@@ -27,7 +27,7 @@ const VidCard = ({vidId, status, descrip}: IVids) => {
         if (done) {
             setVid(data)
         }
-    }, [done])
+    },  [data, done])
 
     const searchCard = () => {
         console.log(vidId)
