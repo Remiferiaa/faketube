@@ -51,4 +51,10 @@ const dateDiff = (x: string) => {
     }
 }
 
+export const datePosted = (time: string) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+    const data= new Date(time).toLocaleDateString().split('/')
+    return `${months[parseInt(data[0])- 1]} ${data[1]}, ${data[2]}`
+}
+
 export default dateDiff
