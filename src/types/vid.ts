@@ -24,6 +24,8 @@ export interface IReponse {
         }
         statistics: {
             viewCount: number
+            likeCount: number,
+            commentCount: number,
         }
     }[]
 }
