@@ -18,7 +18,7 @@ const queries = {
 }
 
 const Popular = () => {
-    const { data, done, loadMore, token, max,loading} = useLink(queries)
+    const { data, done, loadMore, token, max, loading } = useLink(queries)
     const obs = useRef<IntersectionObserver | null>()
     const [list, setList] = useState<IReponse['items'] | null>(null)
     const [hasMore, setMore] = useState<boolean>(false)
@@ -32,7 +32,7 @@ const Popular = () => {
             fields: ['items', 'nextPageToken', 'pageInfo']
         }
     }
-    
+
     const lastElementRef = useCallback(
         (node: HTMLDivElement) => {
             if (loading) return
@@ -69,36 +69,44 @@ const Popular = () => {
                         if (list.length === i + 1) {
                             return (
                                 <div key={item.id} ref={lastElementRef}>
-                                    <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                    <p>{vidDuration(item.contentDetails.duration)}</p>
+                                    <Link to={`/watch/${item.id}`}>
+                                        <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
+                                        <p>{vidDuration(item.contentDetails.duration)}</p>
+                                    </Link>
                                     <div>
-                                        <ChIcon chId={item.snippet.channelId} />
-                                        <div>
-                                            <h1>{item.snippet.title}</h1>
-                                            <p>{item.snippet.channelTitle}</p>
+                                        <Link to={`/watch/${item.id}`}>
+                                            <ChIcon chId={item.snippet.channelId} type='icon' />
                                             <div>
-                                                <p>{viewForm(item.statistics.viewCount)}</p>
-                                                <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                                <h1>{item.snippet.title}</h1>
+                                                <p>{item.snippet.channelTitle}</p>
+                                                <div>
+                                                    <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                             )
                         } else {
                             return (
                                 <div key={item.id}>
-                                    <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                    <p>{vidDuration(item.contentDetails.duration)}</p>
+                                    <Link to={`/watch/${item.id}`}>
+                                        <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
+                                        <p>{vidDuration(item.contentDetails.duration)}</p>
+                                    </Link>
                                     <div>
-                                        <ChIcon chId={item.snippet.channelId} />
-                                        <div>
-                                            <h1>{item.snippet.title}</h1>
-                                            <p>{item.snippet.channelTitle}</p>
+                                        <Link to={`/watch/${item.id}`}>
+                                            <ChIcon chId={item.snippet.channelId} />
                                             <div>
-                                                <p>{viewForm(item.statistics.viewCount)}</p>
-                                                <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                                <h1>{item.snippet.title}</h1>
+                                                <p>{item.snippet.channelTitle}</p>
+                                                <div>
+                                                    <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                             )

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import useLink from '../../Hook/useLink'
 import { IReponse } from '../../types/vid'
 import ChIcon from './ChannelIcon'
@@ -20,7 +21,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
             id: vidId
         }
     }
-    const {rawData, done}= useLink(query)
+    const { rawData, done } = useLink(query)
     const [vid, setVid] = useState<IReponse | null>(null)
 
     useEffect(() => {
@@ -35,19 +36,22 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                 {vid !== null ?
                     <>
                         <div>
-                            <img src={vid.items[0].snippet.thumbnails.medium.url} alt=''></img>
-                            <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
+                            <Link to={`/watch/${vidId}`}>
+                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt=''></img>
+                                <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
+                            </Link>
                             <div>
-                                <h1>{vid.items[0].snippet.title}</h1>
-                                <div>
-                                    <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
-                                    <p>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
-                                </div>
-                                <div>
-                                    <ChIcon chId={vid.items[0].snippet.channelId} />
-                                    <p>{vid.items[0].snippet.channelTitle}</p>
-                                </div>
-                                <p>{descrip}</p>
+                                <Link to={`/watch/${vidId}`}>
+                                    <h1>{vid.items[0].snippet.title}</h1>
+                                    <div>
+                                        <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
+                                        <p>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
+                                    </div>
+                                    <div>
+                                        <ChIcon chId={vid.items[0].snippet.channelId} type='title' />
+                                    </div>
+                                    <p>{descrip}</p>
+                                </Link>
                             </div>
                         </div>
                     </> : null}

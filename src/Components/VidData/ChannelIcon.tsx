@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react'
 import useLink from '../../Hook/useLink'
+import { subForm } from '../../Utils/numFormat'
 
 interface ICh {
     items: {
         snippet: {
+            title: string
             thumbnails: {
                 medium: {
                     url: string
                 }
             }
         }
+        statistics: {
+            subscriberCount: number
+        }
     }[]
+
 }
 
 interface Props {
     chId: string,
+    type?: string,
 }
 
-const ChIcon = ({ chId }: Props) => {
+
+const ChIcon = ({ chId, type }: Props) => {
     const query = {
         type: 'channels',
         params: {
@@ -34,12 +42,55 @@ const ChIcon = ({ chId }: Props) => {
         }
     }, [rawData, done])
 
+    const subIcon = () => {
+        return (
+            <>
+                {chData !== null ?
+                    <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                    : null}
+            </>
+        )
+    }
+
+    const subTitle = () => {
+        return (
+            <>
+                {chData !== null ?
+                    <>
+                        <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                        <p>{chData.items[0].snippet.title}</p>
+                    </>
+                    : null}
+            </>
+        )
+    }
+
+    const subDetails = () => {
+        return (
+            <>
+                {chData !== null ?
+                    <>
+                        <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                        <div>
+                            <p>{chData.items[0].snippet.title}</p>
+                            <p>{subForm(chData.items[0].statistics.subscriberCount)}</p>
+                        </div>
+                    </>
+                    : null}
+            </>
+        )
+    }
     return (
         <>
-            {chData !== null ?
-                <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
-                : null}
+            {
+                (() => {
+                    if (type === 'details') { return subDetails() }
+                    else if (type === 'title') { return subTitle()}
+                    else {return subIcon()}
+                })()
+            }
         </>
+
     )
 }
 
