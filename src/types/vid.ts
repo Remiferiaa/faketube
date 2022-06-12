@@ -1,5 +1,5 @@
-export interface IList {
-    items: [{
+export interface IReponse {
+    items: {
         id: string
         snippet: {
             title: string
@@ -25,6 +25,8 @@ export interface IList {
         statistics: {
             viewCount: number
         }
-    }]
-    nextPageToken?: string
+    }[]
 }
+
+
+

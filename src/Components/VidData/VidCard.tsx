@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import useLink from '../../../Hook/useLink'
-import { IList } from '../../../types/vid'
+import useLink from '../../Hook/useLink'
+import { IReponse } from '../../types/vid'
 import ChIcon from './ChannelIcon'
-import vidDuration from '../../../Utils/timeFormat'
-import { viewForm } from '../../../Utils/numFormat'
-import dateDiff from '../../../Utils/dateFormat'
+import vidDuration from '../../Utils/timeFormat'
+import { viewForm } from '../../Utils/numFormat'
+import dateDiff from '../../Utils/dateFormat'
 
 interface IVids {
     vidId: string
@@ -12,7 +12,7 @@ interface IVids {
     descrip: string
 }
 
-const VidCard = ({vidId, status, descrip}: IVids) => {
+const VidCard = ({ vidId, status, descrip }: IVids) => {
     const query = {
         type: 'videos',
         params: {
@@ -20,21 +20,20 @@ const VidCard = ({vidId, status, descrip}: IVids) => {
             id: vidId
         }
     }
-    const { data, done } = useLink(query)
-    const [vid, setVid] = useState<IList | null>(null)
+    const {rawData, done}= useLink(query)
+    const [vid, setVid] = useState<IReponse | null>(null)
 
     useEffect(() => {
         if (done) {
-            setVid(data)
+            setVid(rawData)
         }
-    },  [data, done])
+    }, [rawData, done])
 
     const searchCard = () => {
-        console.log(vidId)
         return (
             <>
                 {vid !== null ?
-                    <div>
+                    <>
                         <div>
                             <img src={vid.items[0].snippet.thumbnails.medium.url} alt=''></img>
                             <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
@@ -51,7 +50,7 @@ const VidCard = ({vidId, status, descrip}: IVids) => {
                                 <p>{descrip}</p>
                             </div>
                         </div>
-                    </div> : null}
+                    </> : null}
             </>
         )
     }

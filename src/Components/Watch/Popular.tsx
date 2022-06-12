@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import useLink from '../../Hook/useLink'
 import dateDiff from '../../Utils/dateFormat'
 import { viewForm } from '../../Utils/numFormat'
 import vidDuration from '../../Utils/timeFormat'
-import ChIcon from './VidData/ChannelIcon'
-import { IList } from '../../types/vid'
+import ChIcon from '../VidData/ChannelIcon'
+import { IReponse } from '../../types/vid'
 
 const queries = {
     type: 'videos',
@@ -13,46 +13,100 @@ const queries = {
         part: ['snippet', 'contentDetails', 'statistics'],
         chart: 'mostPopular',
         maxResults: 24,
-        fields: ['items', 'nextPageToken']
+        fields: ['items', 'nextPageToken', 'pageInfo']
     }
 }
 
-
-
 const Popular = () => {
-    const { data, done } = useLink(queries)
-    const [list, setList] = useState<IList | null>(null)
+    const { data, done, loadMore, token, max,loading} = useLink(queries)
+    const obs = useRef<IntersectionObserver | null>()
+    const [list, setList] = useState<IReponse['items'] | null>(null)
+    const [hasMore, setMore] = useState<boolean>(false)
+    const newQueries = {
+        type: 'videos',
+        params: {
+            part: ['snippet', 'contentDetails', 'statistics'],
+            chart: 'mostPopular',
+            maxResults: 24,
+            pageToken: token,
+            fields: ['items', 'nextPageToken', 'pageInfo']
+        }
+    }
+    
+    const lastElementRef = useCallback(
+        (node: HTMLDivElement) => {
+            if (loading) return
+            if (obs.current) obs.current.disconnect();
+            obs.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && hasMore) {
+                    loadMore(newQueries)
+                }
+            });
+            if (node) obs.current.observe(node);
+        },
+        [hasMore, loading]
+    );
 
     useEffect(() => {
         if (done) {
             setList(data)
         }
-    },  [data, done])
+    }, [data, done])
+
+    useEffect(() => {
+        if (done && list !== null && list.length < max) {
+            setMore(true)
+        } else {
+            setMore(false)
+        }
+    }, [list, done, max])
 
     const display = () => {
-        return (
-            <>
-                {list?.items.map((item) => {
-                    return (
-                        <div key={item.id}>
-                            <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                            <p>{vidDuration(item.contentDetails.duration)}</p>
-                            <div>
-                                <ChIcon chId={item.snippet.channelId}/>
-                                <div>
-                                    <h1>{item.snippet.title}</h1>
-                                    <p>{item.snippet.channelTitle}</p>
+        if (list !== null) {
+            return (
+                <>
+                    {list.map((item, i) => {
+                        if (list.length === i + 1) {
+                            return (
+                                <div key={item.id} ref={lastElementRef}>
+                                    <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
+                                    <p>{vidDuration(item.contentDetails.duration)}</p>
                                     <div>
-                                        <p>{viewForm(item.statistics.viewCount)}</p>
-                                        <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                        <ChIcon chId={item.snippet.channelId} />
+                                        <div>
+                                            <h1>{item.snippet.title}</h1>
+                                            <p>{item.snippet.channelTitle}</p>
+                                            <div>
+                                                <p>{viewForm(item.statistics.viewCount)}</p>
+                                                <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    )
-                })}
-            </>
-        )
+                            )
+                        } else {
+                            return (
+                                <div key={item.id}>
+                                    <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
+                                    <p>{vidDuration(item.contentDetails.duration)}</p>
+                                    <div>
+                                        <ChIcon chId={item.snippet.channelId} />
+                                        <div>
+                                            <h1>{item.snippet.title}</h1>
+                                            <p>{item.snippet.channelTitle}</p>
+                                            <div>
+                                                <p>{viewForm(item.statistics.viewCount)}</p>
+                                                <p>{dateDiff(item.snippet.publishedAt)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })}
+                </>
+            )
+        }
     }
     return (
         <>
@@ -61,5 +115,3 @@ const Popular = () => {
     )
 }
 export default Popular
-
-

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import useLink from '../../../Hook/useLink'
+import useLink from '../../Hook/useLink'
 
 interface ICh {
-    items: [{
+    items: {
         snippet: {
             thumbnails: {
                 medium: {
@@ -10,15 +10,14 @@ interface ICh {
                 }
             }
         }
-    }]
+    }[]
 }
 
 interface Props {
     chId: string,
 }
 
-
-const ChIcon = ({chId}: Props) => {
+const ChIcon = ({ chId }: Props) => {
     const query = {
         type: 'channels',
         params: {
@@ -28,18 +27,18 @@ const ChIcon = ({chId}: Props) => {
     }
 
     const [chData, setCh] = useState<ICh | null>(null)
-    const { data, done } = useLink(query)
+    const { rawData, done } = useLink(query)
     useEffect(() => {
         if (done) {
-            setCh(data)
+            setCh(rawData)
         }
-    },  [data, done])
+    }, [rawData, done])
 
     return (
         <>
-            {done ?
-                <img src={chData?.items[0].snippet.thumbnails.medium.url} alt=""></img>
-            : null}
+            {chData !== null ?
+                <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                : null}
         </>
     )
 }
