@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+interface ISidebar {
+    sideState: string,
+    setSideState: React.Dispatch<React.SetStateAction<string>>
+}
 
-const Header = () => {
+const Header = ({sideState, setSideState}: ISidebar) => {
     let navigate = useNavigate()
-    const [side, setSide] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,9 +96,19 @@ const Header = () => {
             </svg>
         )
     }
+
+    const sideBarState = () => {
+        if(sideState === 'Active') {
+            setSideState('Inactive')
+        }
+        if(sideState === 'Inactive') {
+            setSideState('Active')
+        }
+    }
+
     return (
         <>
-            <div>
+            <div onClick={() =>  sideBarState()}>
                 <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                     <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
                 </svg>
