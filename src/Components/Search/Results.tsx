@@ -98,7 +98,11 @@ const Result = () => {
                         </div>
                     )
                 }
-            }) : null}
+            }) :
+                <div>
+                    <p>No Results Found</p>
+                </div>
+            }
         </>
     )
 }

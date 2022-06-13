@@ -17,12 +17,16 @@ const Vid = () => {
             id: vidId,
         }
     }
-    const { data, done } = useLink(query)
+    const { data, done, fetcher } = useLink(query)
 
     useEffect(() => {
         if (done)
             setCur(data)
     }, [done, data])
+
+    useEffect(() => {
+        fetcher()
+    }, [vidId])
 
     return (
         <>

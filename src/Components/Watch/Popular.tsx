@@ -118,7 +118,7 @@ const Popular = () => {
     }
     return (
         <>
-            {list !== null ? display() : null}
+            {display() }
         </>
     )
 }

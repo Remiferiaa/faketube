@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { setEnvironmentData } from 'worker_threads'
+import { IVidId } from '../../types/vid'
 import useLink from '../../Hook/useLink'
 import VidCard from './VidCard'
 
@@ -7,14 +7,8 @@ interface Props {
     vidId: string
 }
 
-interface IResult {
-    id: {
-        videoId: string
-    }
-}
-
 const Related = ({ vidId }: Props) => {
-    const [related, setRelated] = useState<Array<IResult>>([])
+    const [related, setRelated] = useState<Array<IVidId>>([])
     const query = {
         type: 'search',
         params: {

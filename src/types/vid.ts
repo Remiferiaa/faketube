@@ -30,5 +30,31 @@ export interface IResponse {
     }[]
 }
 
+export interface IComment {
+    nextPageToken: string,
+    pageInfo: {
+        totalResults: number
+    }
+    items: {
+        id: string
+        snippet: {
+            topLevelComment: {
+                snippet: {
+                    textDisplay: string,
+                    authorDisplayName: string,
+                    authorProfileImageUrl: string,
+                    likeCount: number,
+                    publishedAt: string,
+                    updatedAt: string
+                }
+            }
+            totalReplyCount: number
+        }
+    }[]
+}
 
-
+export interface IVidId {
+    id: {
+        videoId: string
+    }
+}
