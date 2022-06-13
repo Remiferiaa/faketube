@@ -5,7 +5,7 @@ import dateDiff from '../../Utils/dateFormat'
 import { viewForm } from '../../Utils/numFormat'
 import vidDuration from '../../Utils/timeFormat'
 import ChIcon from '../VidData/ChannelIcon'
-import { IReponse } from '../../types/vid'
+import { IResponse } from '../../types/vid'
 
 const queries = {
     type: 'videos',
@@ -20,7 +20,7 @@ const queries = {
 const Popular = () => {
     const { data, done, loadMore, token, max, loading } = useLink(queries)
     const obs = useRef<IntersectionObserver | null>()
-    const [list, setList] = useState<IReponse['items'] | null>(null)
+    const [list, setList] = useState<IResponse['items'] | null>(null)
     const [hasMore, setMore] = useState<boolean>(false)
     const newQueries = {
         type: 'videos',

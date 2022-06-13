@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import useLink from '../../Hook/useLink'
-import { IReponse } from '../../types/vid'
+import { IResponse } from '../../types/vid'
 import ChIcon from './ChannelIcon'
 import vidDuration from '../../Utils/timeFormat'
 import { viewForm } from '../../Utils/numFormat'
@@ -10,7 +10,7 @@ import dateDiff from '../../Utils/dateFormat'
 interface IVids {
     vidId: string
     status: string
-    descrip: string
+    descrip?: string
 }
 
 const VidCard = ({ vidId, status, descrip }: IVids) => {
@@ -22,7 +22,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
         }
     }
     const { rawData, done } = useLink(query)
-    const [vid, setVid] = useState<IReponse | null>(null)
+    const [vid, setVid] = useState<IResponse | null>(null)
 
     useEffect(() => {
         if (done) {
@@ -35,7 +35,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
             <>
                 {vid !== null ?
                     <>
-                        <div>
+                        <>
                             <Link to={`/watch/${vidId}`}>
                                 <img src={vid.items[0].snippet.thumbnails.medium.url} alt=''></img>
                                 <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
@@ -53,7 +53,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                                     <p>{descrip}</p>
                                 </Link>
                             </div>
-                        </div>
+                        </>
                     </> : null}
             </>
         )
@@ -63,7 +63,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
         return (
             <>
                 {vid !== null ?
-                    <div>
+                    <>
                         <div>
                             <img src={vid.items[0].snippet.thumbnails.default.url} alt=''></img>
                             <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
@@ -76,7 +76,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                                 </div>
                             </div>
                         </div>
-                    </div> : null}
+                    </> : null}
             </>
         )
     }
