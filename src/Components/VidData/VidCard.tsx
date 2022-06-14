@@ -28,12 +28,12 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
         if (done) {
             setVid(rawData)
         }
-    }, [rawData, done])
+    }, [rawData, done]) 
 
     const searchCard = () => {
         return (
             <>
-                {vid !== null ?
+                {vid !== null && vid.items.length> 0?
                     <>
                         <>
                             <Link to={`/watch/${vidId}`}>
@@ -62,7 +62,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
     const relatedCard = () => {
         return (
             <>
-                {vid !== null ?
+                {vid !== null && vid.items.length> 0?
                     <>
                         <div>
                             <img src={vid.items[0].snippet.thumbnails.default.url} alt=''></img>
@@ -83,7 +83,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
 
     return (
         <>
-            {status === 'related' ? relatedCard() : searchCard()}
+            {status === 'related'? relatedCard() : searchCard()}
         </>
     )
 }

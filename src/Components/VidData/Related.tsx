@@ -29,7 +29,7 @@ const Related = ({ vidId }: Props) => {
 
     return (
         <>
-            {related !== null ? related.map((item) => {
+            {related.length > 0 ? related.map((item) => {
                 return (
                     <div key={item.id.videoId}>
                         <VidCard vidId={`${item.id.videoId}`} status='related' />
