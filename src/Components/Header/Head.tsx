@@ -6,7 +6,7 @@ interface ISidebar {
     setSideState: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Header = ({sideState, setSideState}: ISidebar) => {
+const Header = ({ sideState, setSideState }: ISidebar) => {
     let navigate = useNavigate()
     const [search, setSearch] = useState<string>('')
 
@@ -23,7 +23,7 @@ const Header = ({sideState, setSideState}: ISidebar) => {
 
     const youtubeIcon = () => {
         return (
-            <svg viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <svg viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                 <g viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet">
                     <g >
                         <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0
@@ -98,31 +98,35 @@ const Header = ({sideState, setSideState}: ISidebar) => {
     }
 
     const sideBarState = () => {
-        if(sideState === 'Active') {
+        if (sideState === 'Active') {
             setSideState('Inactive')
         }
-        if(sideState === 'Inactive') {
+        if (sideState === 'Inactive') {
             setSideState('Active')
         }
     }
 
     return (
-        <>
-            <div onClick={() =>  sideBarState()}>
-                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
-                    <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
-                </svg>
+        <div className='h-14 flex justify-between items-center mx-4'>
+            <div className='flex'>
+                <div className='h-8'>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                        <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
+                    </svg>
+                </div>
+                <div className='h-8'>
+                    <Link to='/'>
+                        {youtubeIcon()}
+                    </Link>
+                </div>
             </div>
-            <div>
-                <Link to='/'>
-                    {youtubeIcon()}
-                </Link>
-            </div>
-            <form onSubmit={(e) => submit(e)}>
-                <label htmlFor='search'></label>
-                <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search' autoComplete='off' placeholder='Search'></input>
-                <button>
-                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <div className='h-8 flex items-center'>
+                <form onSubmit={(e) => submit(e)}>
+                    <label htmlFor='search'></label>
+                    <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search' autoComplete='off' placeholder='Search' className='self-center'></input>
+                </form>
+                <button className='h-full'>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g>
                             <path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z 
                         M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z">
@@ -130,41 +134,43 @@ const Header = ({sideState, setSideState}: ISidebar) => {
                         </g>
                     </svg>
                 </button>
-            </form>
-            <button>
-                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
-                    <g>
-                        <path d="M16,4v4h4V4H16z M19,7h-2V5h2V7z M16,10v4h4v-4H16z M19,13h-2v-2h2V13z M10,4v4h4V4H10z M13,7h-2V5h2V7z 
+            </div>
+            <div className='flex'>
+                <button className='h-8'>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                        <g>
+                            <path d="M16,4v4h4V4H16z M19,7h-2V5h2V7z M16,10v4h4v-4H16z M19,13h-2v-2h2V13z M10,4v4h4V4H10z M13,7h-2V5h2V7z 
                     M10,10v4h4v-4H10z M13,13h-2v-2h2V13z M16,16v4h4v-4H16z M19,19h-2v-2h2V19z M10,16v4h4v-4H10z M13,19h-2v-2h2V19z 
                     M4,4v4h4V4H4z M7,7H5V5h2V7z M4,10 v4h4v-4H4z M7,13H5v-2h2V13z M4,16v4h4v-4H4z M7,19H5v-2h2V19z">
-                        </path>
-                    </g>
-                </svg>
-            </button>
-            <button>
-                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
-                    <g>
-                        <path d="M12,16.5c0.83,0,1.5,0.67,1.5,1.5s-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5S11.17,16.5,12,16.5z 
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+                <button className='h-8'>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                        <g>
+                            <path d="M12,16.5c0.83,0,1.5,0.67,1.5,1.5s-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5S11.17,16.5,12,16.5z 
                     M10.5,12 c0,0.83,0.67,1.5,1.5,1.5s1.5-0.67,1.5-1.5s-0.67-1.5-1.5-1.5S10.5,11.17,10.5,12z 
                     M10.5,6c0,0.83,0.67,1.5,1.5,1.5 s1.5-0.67,1.5-1.5S12.83,4.5,12,4.5S10.5,5.17,10.5,6z">
-                        </path>
-                    </g>
-                </svg>
-            </button>
-            <button>
-                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
-                    <g>
-                        <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z 
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+                <button className='h-8 flex items-center'>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                        <g>
+                            <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z 
                     M12,3c4.96,0,9,4.04,9,9 c0,1.42-0.34,2.76-0.93,3.96c-1.53-1.72-3.98-2.89-7.38-3.03
                     C14.57,12.6,16,10.97,16,9c0-2.21-1.79-4-4-4C9.79,5,8,6.79,8,9 c0,1.97,1.43,3.6,3.31,3.93c-3.4,0.14-5.85,1.31-7.38,3.03
                     C3.34,14.76,3,13.42,3,12C3,7.04,7.04,3,12,3z M9,9c0-1.65,1.35-3,3-3 s3,1.35,3,3c0,1.65-1.35,3-3,3S9,10.65,9,9z 
                     M12,21c-3.16,0-5.94-1.64-7.55-4.12C6.01,14.93,8.61,13.9,12,13.9 c3.39,0,5.99,1.03,7.55,2.98C17.94,19.36,15.16,21,12,21z">
-                        </path>
-                    </g>
-                </svg>
-                <p>SIGN IN</p>
-            </button>
-        </>
+                            </path>
+                        </g>
+                    </svg>
+                    <p>SIGN IN</p>
+                </button>
+            </div>
+        </div>
     )
 }
 

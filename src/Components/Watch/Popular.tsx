@@ -64,7 +64,7 @@ const Popular = () => {
     const display = () => {
         if (list !== null) {
             return (
-                <>
+                <div className='pt-2 border-t-2 border-gray-500 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center'>
                     {list.map((item, i) => {
                         if (list.length === i + 1) {
                             return (
@@ -112,7 +112,7 @@ const Popular = () => {
                             )
                         }
                     })}
-                </>
+                </div>
             )
         }
     }
