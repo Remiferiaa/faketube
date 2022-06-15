@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react'
+
 import { Link } from 'react-router-dom'
 
+interface barState {
+    sideState: string
+}
 
-const SideBar = () => {
+const SideBar = ({sideState} : barState) => {
     return (
         <>
-            <div className='w-64 h-screen flex-col'>
-                <div className='sideIcon'>
-                    <Link to='/' className='h-8 w-12 flex items-center'>
+            <div className={`${sideState}Side`}>
+                <div className={`${sideState}SideHolder`}>
+                    <Link to='/' className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
-                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full block'>
+                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g>
                                     <path d="M4,10V21h6V15h4v6h6V10L12,3Z">
                                     </path>
@@ -19,8 +22,8 @@ const SideBar = () => {
                     </Link>
                     <Link to='/'><p>Home</p></Link>
                 </div>
-                <div className='sideIcon'>
-                    <div className='h-8 w-12 flex items-center'>
+                <div className={`${sideState}SideHolder`}>
+                    <div className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g>
@@ -37,8 +40,8 @@ const SideBar = () => {
                         <p>Explore</p>
                     </div>
                 </div>
-                <div className='sideIcon'>
-                    <div className='h-8 w-12 flex items-center'>
+                <div className={`${sideState}SideHolder`}>
+                    <div className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g height="24" viewBox="0 0 24 24" width="24">
@@ -55,8 +58,8 @@ const SideBar = () => {
                         <p>Shorts</p>
                     </div>
                 </div>
-                <div className='sideIcon'>
-                    <div className='h-8 w-12 flex items-center'>
+                <div className={`${sideState}SideHolder`}>
+                    <div className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g>
@@ -70,8 +73,8 @@ const SideBar = () => {
                         <p>Subscription</p>
                     </div>
                 </div>
-                <div className='sideIcon'>
-                    <div className='h-8 w-12 flex items-center'>
+                <div className={`${sideState}SideHolder`}>
+                    <div className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g>
@@ -85,8 +88,8 @@ const SideBar = () => {
                         <p>Library</p>
                     </div>
                 </div>
-                <div className='sideIcon'>
-                    <div className='h-8 w-12 flex items-center'>
+                <div className={`${sideState}SideHolder`}>
+                    <div className={`${sideState}SideSVG`}>
                         <div className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                 <g>

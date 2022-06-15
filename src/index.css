@@ -16,6 +16,26 @@ code {
     monospace;
 }
 
-.sideIcon {
-  @apply h-12 flex items-center pl-4 pr-4 hover:bg-gray-200 justify-start 
+.fullSide {
+  @apply w-64 h-screen flex-col
+}
+
+.fullSideHolder {
+  @apply h-12 flex items-center pl-4 pr-4 hover:bg-gray-200 justify-start
+}
+
+.fullSideSVG {
+  @apply h-8 w-12 flex items-center
+}
+
+.collSide {
+  @apply w-16 h-screen flex flex-col 
+}
+
+.collSideHolder {
+  @apply h-16 w-16 flex flex-col items-center justify-center text-mini hover:bg-gray-200 
+}
+
+.collSideSVG {
+  @apply flex items-center
 }

@@ -36,18 +36,19 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                 {vid !== null && vid.items.length> 0?
                     <>
                         <>
-                            <Link to={`/watch/${vidId}`}>
-                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt=''></img>
-                                <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
+                            <Link to={`/watch/${vidId}`} className='relative max-w-xs'>
+                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt='' className='min-w-search'></img>
+                                <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(vid.items[0].contentDetails.duration)}</p>
                             </Link>
-                            <div>
+                            <div className='max-w-2xl p-2'>
                                 <Link to={`/watch/${vidId}`}>
-                                    <h1>{vid.items[0].snippet.title}</h1>
-                                    <div>
+                                    <h1 className='font-normal text-ellipsis'>{vid.items[0].snippet.title}</h1>
+                                    <div className='flex items-center gap-1'>
                                         <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
+                                        <p>·</p>
                                         <p>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
                                     </div>
-                                    <div>
+                                    <div className='flex'>
                                         <ChIcon chId={vid.items[0].snippet.channelId} type='title' />
                                     </div>
                                     <p>{descrip}</p>

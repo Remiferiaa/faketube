@@ -25,7 +25,7 @@ const Result = () => {
         type: 'search',
         params: {
             part: 'snippet',
-            maxResults: 30,
+            maxResults: 20,
             q: searchQuery,
             type: 'video',
             fields: ['items(id(videoId), snippet(description))', 'nextPageToken', 'pageInfo']
@@ -83,29 +83,46 @@ const Result = () => {
     }, [location])
 
     return (
-        <>
-            {results.length > 0 ? results.map((item, i) => {
-                if (results.length === i + 1) {
-                    return (
-                        <div ref={lastRef} key={item.id.videoId} >
-                            <VidCard vidId={item.id.videoId} status='search' descrip={item.snippet.description} />
-                        </div>
-                    )
-                } else {
-                    return (
-                        <div key={item.id.videoId} >
-                            <VidCard vidId={item.id.videoId} status='search' descrip={item.snippet.description} />
-                        </div>
-                    )
-                }
-            }) :
-                <div>
-                    <p>No Results Found</p>
+        <div className='flex flex-col justify-center items-center font-light bg-content p-4 w-full'>
+            <div className='flex flex-col gap-4'>
+                <div className='flex justify-start pt-2 pb-2 border-b border-gray-500'>
+                    <div className='h-6 w-6'>
+                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
+                            <g>
+                                <path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z M18,5v1h3V5H18z 
+                            M6,14h1v-2v-1V9H6v2H3v1h3V14zM10,12h11v-1H10V12z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <p className='font-bold'>FILTERS</p>
                 </div>
-            }
-        </>
+                {results.length > 0 ? results.map((item, i) => {
+                    if (results.length === i + 1) {
+                        return (
+                            <div ref={lastRef} key={item.id.videoId} className='flex'>
+                                <VidCard vidId={item.id.videoId} status='search' descrip={item.snippet.description} />
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div key={item.id.videoId} className='flex'>
+                                <VidCard vidId={item.id.videoId} status='search' descrip={item.snippet.description} />
+                            </div>
+                        )
+                    }
+                }) :
+                    <div>
+                        <p>No Results Found</p>
+                    </div>
+                }
+            </div>
+        </div>
     )
 }
 
 
 export default Result
+
+
+

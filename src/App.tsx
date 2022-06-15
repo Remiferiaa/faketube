@@ -7,13 +7,13 @@ import Vid from "./Components/Watch/Video";
 import SideBar from "./Components/Sidebar/Side";
 
 function App() {
-  const [sideState, setSide] = useState<string>('Active')
+  const [sideState, setSide] = useState<string>('full')
   return (
     <Router basename="/">
       <div>
         <Header sideState={sideState} setSideState={setSide} />
         <div className='flex'>
-          <SideBar />
+          <SideBar sideState={sideState} />
           <Routes>
             <Route path="/" element={<Popular />}></Route>
             <Route path="/results" element={<Result />}></Route>

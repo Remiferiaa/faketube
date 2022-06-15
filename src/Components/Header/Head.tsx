@@ -98,18 +98,18 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
     }
 
     const sideBarState = () => {
-        if (sideState === 'Active') {
-            setSideState('Inactive')
+        if (sideState === 'full') {
+            setSideState('coll')
         }
-        if (sideState === 'Inactive') {
-            setSideState('Active')
+        if (sideState === 'coll') {
+            setSideState('full')
         }
     }
 
     return (
         <div className='h-14 flex justify-between items-center mx-4'>
             <div className='flex gap-6'>
-                <div className='h-6 w-6'>
+                <div className='h-6 w-6' onClick={()=> sideBarState()}>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
                     </svg>

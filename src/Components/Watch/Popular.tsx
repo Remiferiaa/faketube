@@ -71,10 +71,10 @@ const Popular = () => {
                                 <div key={item.id} ref={lastElementRef}>
                                     <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p className='absolute right-1 bottom-2 bg-black text-xs text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}  className='flex gap-2'>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
                                                 <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
@@ -94,10 +94,10 @@ const Popular = () => {
                                 <div key={item.id}>
                                     <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p className='absolute right-1 bottom-2 bg-black text-xs text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}  className='flex gap-2'>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
                                                 <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
