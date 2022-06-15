@@ -46,7 +46,7 @@ const ChIcon = ({ chId, type }: Props) => {
         return (
             <>
                 {chData !== null ?
-                    <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
+                    <img src={chData.items[0].snippet.thumbnails.medium.url} alt="" className='w-8 h-8 rounded-full mt-1 mr-1'></img>
                     : null}
             </>
         )
@@ -85,8 +85,8 @@ const ChIcon = ({ chId, type }: Props) => {
             {
                 (() => {
                     if (type === 'details') { return subDetails() }
-                    else if (type === 'title') { return subTitle()}
-                    else {return subIcon()}
+                    else if (type === 'title') { return subTitle() }
+                    else { return subIcon() }
                 })()
             }
         </>

@@ -108,35 +108,39 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
 
     return (
         <div className='h-14 flex justify-between items-center mx-4'>
-            <div className='flex'>
-                <div className='h-8'>
+            <div className='flex gap-6'>
+                <div className='h-6 w-6'>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
                     </svg>
                 </div>
-                <div className='h-8'>
+                <div className='h-6 w-6'>
                     <Link to='/'>
                         {youtubeIcon()}
                     </Link>
                 </div>
             </div>
-            <div className='h-8 flex items-center'>
-                <form onSubmit={(e) => submit(e)}>
+            <div>
+                <form onSubmit={(e) => submit(e)} className='h-8 flex items-center'>
                     <label htmlFor='search'></label>
-                    <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search' autoComplete='off' placeholder='Search' className='self-center'></input>
+                    <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search'
+                        autoComplete='off' placeholder='Search' className='w-96 border-2 border-black p-1'>
+                    </input>
+                    <div className='flex bg-gray-100 h-9 w-12 items-center justify-center'>
+                        <button className='h-6 w-6'>
+                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                                <g>
+                                    <path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z 
+                                         M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
                 </form>
-                <button className='h-full'>
-                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
-                        <g>
-                            <path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z 
-                        M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z">
-                            </path>
-                        </g>
-                    </svg>
-                </button>
             </div>
-            <div className='flex'>
-                <button className='h-8'>
+            <div className='flex items-center gap-2'>
+                <button className='h-6 w-6'>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g>
                             <path d="M16,4v4h4V4H16z M19,7h-2V5h2V7z M16,10v4h4v-4H16z M19,13h-2v-2h2V13z M10,4v4h4V4H10z M13,7h-2V5h2V7z 
@@ -146,7 +150,7 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
                         </g>
                     </svg>
                 </button>
-                <button className='h-8'>
+                <button className='h-6 w-6'>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g>
                             <path d="M12,16.5c0.83,0,1.5,0.67,1.5,1.5s-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5S11.17,16.5,12,16.5z 
@@ -156,8 +160,8 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
                         </g>
                     </svg>
                 </button>
-                <button className='h-8 flex items-center'>
-                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
+                <button className='h-9 flex items-center text-signIn border border-signIn gap-2 '>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full fill-signIn pl-1 pr-1'>
                         <g>
                             <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z 
                     M12,3c4.96,0,9,4.04,9,9 c0,1.42-0.34,2.76-0.93,3.96c-1.53-1.72-3.98-2.89-7.38-3.03
@@ -167,7 +171,7 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
                             </path>
                         </g>
                     </svg>
-                    <p>SIGN IN</p>
+                    <p className='pl-1 pr-1'>SIGN IN</p>
                 </button>
             </div>
         </div>

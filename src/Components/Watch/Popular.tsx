@@ -64,23 +64,24 @@ const Popular = () => {
     const display = () => {
         if (list !== null) {
             return (
-                <div className='pt-2 border-t-2 border-gray-500 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center'>
+                <div className='pt-4 border-t border-gray-500 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4 bg-content'>
                     {list.map((item, i) => {
                         if (list.length === i + 1) {
                             return (
                                 <div key={item.id} ref={lastElementRef}>
-                                    <Link to={`/watch/${item.id}`}>
+                                    <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-2 bg-black text-xs text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}>
-                                            <ChIcon chId={item.snippet.channelId} type='icon' />
-                                            <div>
-                                                <h1>{item.snippet.title}</h1>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2'>
+                                            <ChIcon chId={item.snippet.channelId}/>
+                                            <div className='text-xs'>
+                                                <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
                                                 <p>{item.snippet.channelTitle}</p>
-                                                <div>
+                                                <div  className='flex items-center gap-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
                                                 </div>
                                             </div>
@@ -91,18 +92,19 @@ const Popular = () => {
                         } else {
                             return (
                                 <div key={item.id}>
-                                    <Link to={`/watch/${item.id}`}>
+                                    <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-2 bg-black text-xs text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}>
-                                            <ChIcon chId={item.snippet.channelId} />
-                                            <div>
-                                                <h1>{item.snippet.title}</h1>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2'>
+                                            <ChIcon chId={item.snippet.channelId}/>
+                                            <div className='text-xs'>
+                                                <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
                                                 <p>{item.snippet.channelTitle}</p>
-                                                <div>
+                                                <div  className='flex items-center gap-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
                                                 </div>
                                             </div>
@@ -118,7 +120,7 @@ const Popular = () => {
     }
     return (
         <>
-            {display() }
+            {display()}
         </>
     )
 }

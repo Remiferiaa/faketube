@@ -15,3 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.sideIcon {
+  @apply h-12 flex items-center pl-4 pr-4 hover:bg-gray-200 justify-start 
+}
