@@ -3,7 +3,7 @@ const timeFormat = (timer: number) => {
     const minutes = `${Math.floor(timer / 60)}`
     const getMinutes = `0${parseInt(minutes) % 60}`.slice(-2)
     const getHours = Math.floor(timer / 3600) < 100 ? `0${Math.floor(timer / 3600)}`.slice(-2) : `${Math.floor(timer / 3600)}`.slice(-3)
-    return `${getHours} : ${getMinutes} : ${getSeconds}`
+    return `${getHours}:${getMinutes}:${getSeconds}`
 }
 
 const vidDuration = (dura: string) => {
