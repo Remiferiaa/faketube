@@ -11,42 +11,42 @@ const dateDiff = (x: string) => {
 
     if (diff < minute) {
         if (diff < 1 && diff > 0) { return '1 second ago' }
-        if (diff > 1) { return `${Math.floor(diff)} seconds ago` }
+        if (diff >= 2) { return `${Math.floor(diff)} seconds ago` }
     }
 
     if (diff > minute && diff < hour) {
         let interval = diff / minute
-        if (interval > 1) { return `${Math.floor(interval)} minutes ago` }
+        if (interval > 2) { return `${Math.floor(interval)} minutes ago` }
         else { return '1 minute ago' }
     }
 
     if (diff > hour && diff < day) {
         let interval = diff / hour
-        if (interval > 1) { return `${Math.floor(interval)} hours ago` }
+        if (interval >= 2) { return `${Math.floor(interval)} hours ago` }
         else { return '1 hour ago' }
     }
 
     if (diff > day && diff < week) {
         let interval = diff / day
-        if (interval > 1) { return `${Math.floor(interval)} days ago` }
+        if (interval >= 2) { return `${Math.floor(interval)} days ago` }
         else { return '1 day ago' }
     }
 
     if (diff > week && diff < month) {
         let interval = diff / week
-        if (interval > 1) { return `${Math.floor(interval)} weeks ago` }
+        if (interval >= 2) { return `${Math.floor(interval)} weeks ago` }
         else { return '1 week ago' }
     }
 
     if (diff > month && diff < year) {
         let interval = diff / month
-        if (interval > 1) { return `${Math.floor(interval)} months ago` }
+        if (interval >= 2) { return `${Math.floor(interval)} months ago` }
         else { return '1 month ago' }
     }
 
     if (diff > year ) {
         let interval = diff / year
-        if (interval > 1) { return `${Math.floor(interval)} years ago` }
+        if (interval >= 2) { return `${Math.floor(interval)} years ago` }
         else { return '1 year ago' }
     }
 }
