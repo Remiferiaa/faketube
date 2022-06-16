@@ -28,22 +28,22 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
         if (done) {
             setVid(rawData)
         }
-    }, [rawData, done]) 
+    }, [rawData, done])
 
     const searchCard = () => {
         return (
             <>
-                {vid !== null && vid.items.length> 0?
+                {vid !== null && vid.items.length > 0 ?
                     <>
                         <>
-                            <Link to={`/watch/${vidId}`} className='relative max-w-xs'>
-                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt='' className='min-w-search'></img>
+                            <Link to={`/watch/${vidId}`} className='relative '>
+                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt='' className='max-w-[320px]'></img>
                                 <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(vid.items[0].contentDetails.duration)}</p>
                             </Link>
                             <div className='max-w-2xl p-2'>
                                 <Link to={`/watch/${vidId}`}>
-                                    <h1 className='font-normal text-ellipsis'>{vid.items[0].snippet.title}</h1>
-                                    <div className='flex items-center gap-1'>
+                                    <h1 className='font-normal line-clamp-2 overflow-hidden'>{vid.items[0].snippet.title}</h1>
+                                    <div className='flex items-center gap-1  line-clamp-1 overflow-hidden'>
                                         <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
                                         <p>·</p>
                                         <p>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
@@ -51,7 +51,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                                     <div className='flex'>
                                         <ChIcon chId={vid.items[0].snippet.channelId} type='title' />
                                     </div>
-                                    <p>{descrip}</p>
+                                    <p className='line-clamp-2 text-xs overflow-hidden text-ellipsis max-h-[2rem]'>{descrip}</p>
                                 </Link>
                             </div>
                         </>
@@ -63,20 +63,23 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
     const relatedCard = () => {
         return (
             <>
-                {vid !== null && vid.items.length> 0?
+                {vid !== null && vid.items.length > 0 ?
                     <>
-                        <div>
-                            <img src={vid.items[0].snippet.thumbnails.default.url} alt=''></img>
-                            <p>{vidDuration(vid.items[0].contentDetails.duration)}</p>
-                            <div>
-                                <h1>{vid.items[0].snippet.title}</h1>
-                                <p>{vid.items[0].snippet.channelTitle}</p>
-                                <div>
-                                    <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
-                                    <p>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
+                        <>
+                            <div className='relative'>
+                                <img src={vid.items[0].snippet.thumbnails.medium.url} alt='' className='max-w-[160px]'></img>
+                                <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(vid.items[0].contentDetails.duration)}</p>
+                            </div>
+                            <div className='flex flex-col justify-center'>
+                                <h1 className='line-clamp-2 text-sm overflow-hidden text-ellipsis font-bold max-h-[2.5rem] mb-1'>{vid.items[0].snippet.title}</h1>
+                                <p className='font-light text-xs line-clamp-1 overflow-hidden text-ellipsis'>{vid.items[0].snippet.channelTitle}</p>
+                                <div className='flex items-center gap-1'>
+                                    <p className='font-light text-xs'>{viewForm(vid.items[0].statistics.viewCount)}</p>
+                                    <p>·</p>
+                                    <p className='font-light text-xs'>{dateDiff(vid.items[0].snippet.publishedAt)}</p>
                                 </div>
                             </div>
-                        </div>
+                        </>
                     </> : null}
             </>
         )
@@ -84,7 +87,7 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
 
     return (
         <>
-            {status === 'related'? relatedCard() : searchCard()}
+            {status === 'related' ? relatedCard() : searchCard()}
         </>
     )
 }

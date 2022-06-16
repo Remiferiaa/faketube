@@ -1,9 +1,10 @@
 import React, { useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ISidebar } from '../../types/vid'
-
+import useWindowSize from '../../Hook/useWindowSize'
 
 const Header = ({ sideState, setSide}: ISidebar) => {
+    const {screen} = useWindowSize()
     let navigate = useNavigate()
     const [search, setSearch] = useState<string>('')
 
@@ -118,10 +119,10 @@ const Header = ({ sideState, setSide}: ISidebar) => {
                 </div>
             </div>
             <div>
-                <form onSubmit={(e) => submit(e)} className='h-8 flex items-center'>
+                <form onSubmit={(e) => submit(e)} className={`flex items-center ${screen > 800 ? 'h-8' : ''}`}>
                     <label htmlFor='search'></label>
                     <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search'
-                        autoComplete='off' placeholder='Search' className='w-96 border-2 border-black p-1'>
+                        autoComplete='off' placeholder='Search' className={`border-2 border-black p-1 ${screen > 800 ? 'visible w-96' : 'invisible w-0'}`}>
                     </input>
                     <div className='flex bg-gray-100 h-9 w-12 items-center justify-center'>
                         <button className='h-6 w-6'>
@@ -168,7 +169,7 @@ const Header = ({ sideState, setSide}: ISidebar) => {
                             </path>
                         </g>
                     </svg>
-                    <p className='pl-1 pr-1'>SIGN IN</p>
+                    <p className='pl-1 pr-1 text-xs'>SIGN IN</p>
                 </button>
             </div>
         </div>

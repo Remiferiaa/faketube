@@ -83,9 +83,9 @@ const Result = () => {
     }, [location])
 
     return (
-        <div className='flex flex-col justify-center items-center font-light bg-content p-4 w-full'>
-            <div className='flex flex-col gap-4'>
-                <div className='flex justify-start pt-2 pb-2 border-b border-gray-500'>
+        <div className='flex flex-col items-center font-light bg-content p-4 w-full'>
+            <div className='flex flex-col gap-4 mt-4'>
+                <div className='flex justify-start pt-2 pb-2 border-b border-black border-opacity-10'>
                     <div className='h-6 w-6'>
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                             <g>

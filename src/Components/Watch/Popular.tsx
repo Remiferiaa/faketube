@@ -64,7 +64,7 @@ const Popular = () => {
     const display = () => {
         if (list !== null) {
             return (
-                <div className='pt-4 border-t border-gray-500 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4 bg-content'>
+                <div className='pt-4 border-t border-black border-opacity-10 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4 bg-content'>
                     {list.map((item, i) => {
                         if (list.length === i + 1) {
                             return (
@@ -77,7 +77,7 @@ const Popular = () => {
                                         <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
-                                                <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
+                                                <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
                                                 <p>{item.snippet.channelTitle}</p>
                                                 <div  className='flex items-center gap-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
@@ -100,7 +100,7 @@ const Popular = () => {
                                         <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
-                                                <h1 className='text-ellipsis font-bold text-sm'>{item.snippet.title}</h1>
+                                                <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
                                                 <p>{item.snippet.channelTitle}</p>
                                                 <div  className='flex items-center gap-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>

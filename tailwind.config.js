@@ -4,10 +4,6 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    minWidth: {
-      'search': '15rem'
-    },
-    
     extend: {
       colors: {
         'content': '#f9f9f9',

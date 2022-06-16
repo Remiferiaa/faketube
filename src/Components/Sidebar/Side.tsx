@@ -29,7 +29,7 @@ const Side = ({ sideState, setSide, showSide, setShow }: ISidebar) => {
         } else {
             setShow(true)
         }
-    }, [location])
+    }, [location.pathname])
 
     const side = () => {
         return (

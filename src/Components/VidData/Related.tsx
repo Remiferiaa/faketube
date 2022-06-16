@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { IVidId } from '../../types/vid'
 import useLink from '../../Hook/useLink'
+import useWindowSize from '../../Hook/useWindowSize'
 import VidCard from './VidCard'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const Related = ({ vidId }: Props) => {
+    const {screen} = useWindowSize()
     const [related, setRelated] = useState<Array<IVidId>>([])
     const query = {
         type: 'search',
@@ -28,15 +30,15 @@ const Related = ({ vidId }: Props) => {
     }, [done, data])
 
     return (
-        <>
+        <div className={`flex flex-col gap-2 ${ screen < 800 ? '' : 'max-w-[350px]'}`}>
             {related.length > 0 ? related.map((item) => {
                 return (
-                    <div key={item.id.videoId}>
+                    <div key={item.id.videoId} className='flex max-h-[90px] gap-1'>
                         <VidCard vidId={`${item.id.videoId}`} status='related' />
                     </div>
                 )
             }) : null}
-        </>
+        </div>
     )
 }
 

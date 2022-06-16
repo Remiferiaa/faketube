@@ -7,8 +7,10 @@ import ChIcon from '../VidData/ChannelIcon'
 import { viewForm } from '../../Utils/numFormat'
 import Related from '../VidData/Related'
 import Comments from '../VidData/Comments'
+import useWindowSize from '../../Hook/useWindowSize'
 
 const Vid = () => {
+    const { screen } = useWindowSize()
     const [curVid, setCur] = useState<IResponse['items'] | null>(null)
     const vidId = useParams().id
     const query = {
@@ -32,22 +34,25 @@ const Vid = () => {
     return (
         <>
             {curVid !== null ? (
-                <>
-                    <div>
-                        <iframe width="640" height="360"
-                            allow='autoplay'
-                            src={`https://www.youtube.com/embed/${vidId}?autoplay=1`}
-                            frameBorder="0" allowFullScreen>
-                        </iframe>
-                        <div>
-                            <h1>{curVid[0].snippet.title}</h1>
-                            <div>
-                                <div>
-                                    <p>{Number(curVid[0].statistics.viewCount).toLocaleString()}</p>
+                <div className='bg-content px-6 pt-6 flex w-full gap-6 justify-center'>
+                    <div className='max-w-7xl max-h-[720px]'>
+                        <div className='pb-[56.25%] overflow-hidden h-0 relative w-full'>
+                            <iframe 
+                                allow='autoplay'
+                                src={`https://www.youtube.com/embed/${vidId}?autoplay=1`}
+                                frameBorder="0" allowFullScreen className='left-0 top-0 h-full w-full absolute '>
+                            </iframe>
+                        </div>
+                        <div className='mt-4'>
+                            <h1 className='text-lg pb-4'>{curVid[0].snippet.title}</h1>
+                            <div className='flex justify-between border-b border-black border-opacity-10 mb-4 pb-4'>
+                                <div className='flex text-sm gap-1'>
+                                    <p>{Number(curVid[0].statistics.viewCount).toLocaleString()} views</p>
+                                    <p>·</p>
                                     <p>{datePosted(curVid[0].snippet.publishedAt)}</p>
                                 </div>
-                                <div className='flex'>
-                                    <div className='flex gap-2'>
+                                <div className='flex text-sm gap-1'>
+                                    <div className='flex gap-2 items-center'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g>
@@ -62,7 +67,7 @@ const Vid = () => {
                                         </div>
                                         <p>{viewForm(curVid[0].statistics.likeCount)}</p>
                                     </div>
-                                    <div className='flex gap-2'>
+                                    <div className='flex gap-2 items-center'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g >
@@ -77,7 +82,7 @@ const Vid = () => {
                                         </div>
                                         <p>DISLIKE</p>
                                     </div>
-                                    <div className='flex gap-2'>
+                                    <div className='flex gap-2 items-center'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g mirror-in-rtl="">
@@ -89,7 +94,7 @@ const Vid = () => {
                                         </div>
                                         <p>SHARE</p>
                                     </div>
-                                    <div className='flex gap-2'>
+                                    <div className='flex gap-2 items-center'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g>
@@ -99,7 +104,7 @@ const Vid = () => {
                                             </svg>
                                         </div>
                                         <p>SAVE</p>
-                                     className='flex gap-2'</div>
+                                    </div>
                                     <div className='h-6 w-6'>
                                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                             <g>
@@ -113,17 +118,23 @@ const Vid = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div className='flex justify-between'>
+                        <div className='flex flex-col mb-4'>
+                            <div className='flex justify-between mt-1'>
                                 <ChIcon chId={curVid[0].snippet.channelId} type='details' />
-                                <button type='button'>SUBSCRIBE</button>
+                                <button type='button' className='bg-red-600 text-white px-4 py-2.5 text-sm self-center'>SUBSCRIBE</button>
                             </div>
-                            <p>{curVid[0].snippet.description}</p>
+                            <p className='ml-16 max-w-[615px] break-all'>{curVid[0].snippet.description}</p>
                         </div>
+                        {screen < 800 ?
+                            <div className='max-h-[1000px] overflow-hidden'>
+                                <Related vidId={curVid[0].id} />
+                            </div>
+                            :
+                            null}
+                        <Comments vidId={curVid[0].id} total={curVid[0].statistics.commentCount} />
                     </div>
-                    <Related vidId={curVid[0].id} />
-                    <Comments vidId={curVid[0].id} total={curVid[0].statistics.commentCount} />
-                </>
+                    {screen > 800 ? <Related vidId={curVid[0].id} /> : null}
+                </div>
             ) : null}
         </>
     )

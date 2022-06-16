@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ISidebar } from '../../types/vid'
 import useWindowSize from '../../Hook/useWindowSize'
 
-const SideModal = ({ sideState, setSide, showSide }: ISidebar) => {
+const SideModal = ({ sideState, setSide}: ISidebar) => {
+    const location = useLocation()
     const { screen } = useWindowSize()
     const youtubeIcon = () => {
         return (
@@ -89,6 +90,10 @@ const SideModal = ({ sideState, setSide, showSide }: ISidebar) => {
         }
     }
 
+    useEffect(() => {
+        setSide('coll')
+    }, [location])
+    
     const sideBarModal = () => {
         return (
             <>
@@ -211,10 +216,10 @@ const SideModal = ({ sideState, setSide, showSide }: ISidebar) => {
             </>
         )
     }
-
+    
     return (
         <>
-            {screen < 800 && showSide === true ? sideBarModal() : null}
+            {screen < 800 || location.pathname.includes('/watch') ? sideBarModal() : null}
         </>
     )
 }

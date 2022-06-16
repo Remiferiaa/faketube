@@ -69,13 +69,13 @@ const ChIcon = ({ chId, type }: Props) => {
         return (
             <>
                 {chData !== null ?
-                    <>
-                        <img src={chData.items[0].snippet.thumbnails.medium.url} alt=""></img>
-                        <div>
-                            <p>{chData.items[0].snippet.title}</p>
-                            <p>{subForm(chData.items[0].statistics.subscriberCount)}</p>
+                    <div className='flex items-center'>
+                        <img src={chData.items[0].snippet.thumbnails.medium.url} alt="" className='w-12 h-12 rounded-full mt-2 mr-4 mb-1'></img>
+                        <div className='flex flex-col'>
+                            <p className='text-sm font-bold'>{chData.items[0].snippet.title}</p>
+                            <p className='text-xs font-light'>{subForm(chData.items[0].statistics.subscriberCount)} subscribers</p>
                         </div>
-                    </>
+                    </div>
                     : null}
             </>
         )
