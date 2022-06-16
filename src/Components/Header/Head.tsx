@@ -157,8 +157,8 @@ const Header = ({ sideState, setSide}: ISidebar) => {
                         </g>
                     </svg>
                 </button>
-                <button className='h-9 flex items-center text-signIn border border-signIn gap-2 '>
-                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full fill-signIn pl-1 pr-1'>
+                <button className='h-9 flex items-center text-lmBlue border border-lmBlue gap-2 '>
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full fill-lmBlue pl-1 pr-1'>
                         <g>
                             <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z 
                     M12,3c4.96,0,9,4.04,9,9 c0,1.42-0.34,2.76-0.93,3.96c-1.53-1.72-3.98-2.89-7.38-3.03
