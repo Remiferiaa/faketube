@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { ISidebar } from '../../types/vid'
 
-interface ISidebar {
-    sideState: string,
-    setSideState: React.Dispatch<React.SetStateAction<string>>
-}
 
-const Header = ({ sideState, setSideState }: ISidebar) => {
+const Header = ({ sideState, setSide}: ISidebar) => {
     let navigate = useNavigate()
     const [search, setSearch] = useState<string>('')
 
@@ -99,10 +96,10 @@ const Header = ({ sideState, setSideState }: ISidebar) => {
 
     const sideBarState = () => {
         if (sideState === 'full') {
-            setSideState('coll')
+            setSide('coll')
         }
         if (sideState === 'coll') {
-            setSideState('full')
+            setSide('full')
         }
     }
 

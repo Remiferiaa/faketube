@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 
 const useWindowSize = () => {
-    const [screen, setScreen] = useState<number>()
+    const [screen, setScreen] = useState<number>(0)
 
     useEffect(() => {
         function resize() {
@@ -16,7 +16,7 @@ const useWindowSize = () => {
         return () => window.removeEventListener("resize", resize);
     }, [])
 
-    return { screen }
+    return {screen}
 }
 
-export default useWindowSize()
+export default useWindowSize

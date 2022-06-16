@@ -94,8 +94,8 @@ const Comments = ({ vidId, total }: Props) => {
     const hasComment = () => {
         return (
             <div>
-                <div>
-                    <p>{Number(total).toLocaleString()}</p>
+                <div className='flex gap-4'>
+                    <p>{Number(total).toLocaleString()} Comments</p>
                     <div>
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                             <g>
@@ -107,89 +107,110 @@ const Comments = ({ vidId, total }: Props) => {
                     </div>
                 </div>
                 <div>
-                    <img src='https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj' alt=""></img>
+                    <img src='https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj' alt="" className='w-8 h-8 rounded-full mt-1 mr-1'></img>
                     <form onSubmit={(e) => fakeSubmit(e)}>
                         <label htmlFor='addComm'></label>
                         <input name='addComm' type='text' id='addComm' autoComplete='none' value={txt}
-                            placeholder='Add a comment...' onChange={(e) => setTxt(e.target.value)}></input>
+                            placeholder='Add a comment...' onChange={(e) => setTxt(e.target.value)} className='border-b border-gray-500 '></input>
                     </form>
                 </div>
-                {comm?.map((post, i) => {
-                    if (comm.length === i + 1) {
-                        return (
-                            <div key={post.id} ref={lastCommentRef}>
-                                <div>
-                                    <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
-                                    <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
-                                        post.snippet.topLevelComment.snippet.updatedAt)}
-                                    </p>
+                <div>
+                    {comm?.map((post, i) => {
+                        if (comm.length === i + 1) {
+                            return (
+                                <div key={post.id} ref={lastCommentRef}>
+                                    <div>
+                                        <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-8 h-8 rounded-full mt-1 mr-1'></img>
+                                    </div>
+                                    <div>
+                                        <div className='flex gap-1'>
+                                            <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
+                                            <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
+                                                post.snippet.topLevelComment.snippet.updatedAt)}
+                                            </p>
+                                        </div>
+                                        <p>{post.snippet.topLevelComment.snippet.textDisplay}</p>
+                                        <div className='flex'>
+                                            <div className='h-4 w-4'>
+                                                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
+                                                    <g>
+                                                        <path d="M12.42,14A1.54,1.54,0,0,0,14,12.87l1-4.24C15.12,7.76,15,7,14,7H10l1.48-3.54
+                                                             A1.17,1.17,0,0,0,10.24,2a1.49,1.49,0,0,0-1.08.46
+                                                             L5,7H1v7ZM9.89,3.14
+                                                             A.48.48,0,0,1,10.24,3a.29.29,0,0,1,.23.09S9,6.61,9,6.61L8.46,8
+                                                             H14c0,.08-1,4.65-1,4.65a.58.58,0,0,1-.58.35H6V7.39ZM2,8H5v5H2Z" >
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p>{viewForm(post.snippet.topLevelComment.snippet.likeCount)}</p>
+                                            <div className='h-4 w-4'>
+                                                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
+                                                    <g>
+                                                        <path d="M3.54,2A1.55,1.55,0,0,0,2,3.13L1,7.37C.83,8.24,1,9,2,9
+                                                            H6L4.52,12.54A1.17,1.17,0,0,0,5.71,14a1.49,1.49,0,0,0,1.09-.46
+                                                            L11,9h4V2ZM6.07,12.86a.51.51,0,0,1-.36.14.28.28,0,0,1-.22-.09l0-.05L6.92,9.39,7.5,8H2a1.5,1.5,0,0,1,0-.41L3,3.35
+                                                            A.58.58,0,0,1,3.54,3H10V8.61ZM14,8H11l0-5h3Z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p>REPLY</p>
+                                        </div>
+                                        {replyCheck(post.snippet.totalReplyCount)}
+                                    </div>
                                 </div>
-                                <p>{post.snippet.topLevelComment.snippet.textDisplay}</p>
-                                <div>
-                                    <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                        <g>
-                                            <path d="M12.42,14A1.54,1.54,0,0,0,14,12.87l1-4.24C15.12,7.76,15,7,14,7H10l1.48-3.54
-                                        A1.17,1.17,0,0,0,10.24,2a1.49,1.49,0,0,0-1.08.46
-                                        L5,7H1v7ZM9.89,3.14
-                                        A.48.48,0,0,1,10.24,3a.29.29,0,0,1,.23.09S9,6.61,9,6.61L8.46,8
-                                        H14c0,.08-1,4.65-1,4.65a.58.58,0,0,1-.58.35H6V7.39ZM2,8H5v5H2Z" >
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <p>{viewForm(post.snippet.topLevelComment.snippet.likeCount)}</p>
-                                    <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                        <g>
-                                            <path d="M3.54,2A1.55,1.55,0,0,0,2,3.13L1,7.37C.83,8.24,1,9,2,9
-                                        H6L4.52,12.54A1.17,1.17,0,0,0,5.71,14a1.49,1.49,0,0,0,1.09-.46
-                                        L11,9h4V2ZM6.07,12.86a.51.51,0,0,1-.36.14.28.28,0,0,1-.22-.09l0-.05L6.92,9.39,7.5,8H2a1.5,1.5,0,0,1,0-.41L3,3.35
-                                        A.58.58,0,0,1,3.54,3H10V8.61ZM14,8H11l0-5h3Z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <p>REPLY</p>
+                            )
+                        } else {
+                            return (
+                                <div key={post.id}>
+                                    <div>
+                                        <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-8 h-8 rounded-full mt-1 mr-1'></img>
+                                    </div>
+                                    <div>
+                                        <div className='flex gap-1'>
+                                            <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
+                                            <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
+                                                post.snippet.topLevelComment.snippet.updatedAt)}
+                                            </p>
+                                        </div>
+                                        <p>{post.snippet.topLevelComment.snippet.textDisplay}</p>
+                                        <div className='flex'>
+                                            <div className='h-4 w-4'>
+                                                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
+                                                    <g>
+                                                        <path d="M12.42,14A1.54,1.54,0,0,0,14,12.87l1-4.24C15.12,7.76,15,7,14,7H10l1.48-3.54
+                                                             A1.17,1.17,0,0,0,10.24,2a1.49,1.49,0,0,0-1.08.46
+                                                             L5,7H1v7ZM9.89,3.14
+                                                             A.48.48,0,0,1,10.24,3a.29.29,0,0,1,.23.09S9,6.61,9,6.61L8.46,8
+                                                             H14c0,.08-1,4.65-1,4.65a.58.58,0,0,1-.58.35H6V7.39ZM2,8H5v5H2Z" >
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p>{viewForm(post.snippet.topLevelComment.snippet.likeCount)}</p>
+                                            <div className='h-4 w-4'>
+                                                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
+                                                    <g>
+                                                        <path d="M3.54,2A1.55,1.55,0,0,0,2,3.13L1,7.37C.83,8.24,1,9,2,9
+                                                            H6L4.52,12.54A1.17,1.17,0,0,0,5.71,14a1.49,1.49,0,0,0,1.09-.46
+                                                            L11,9h4V2ZM6.07,12.86a.51.51,0,0,1-.36.14.28.28,0,0,1-.22-.09l0-.05L6.92,9.39,7.5,8H2a1.5,1.5,0,0,1,0-.41L3,3.35
+                                                            A.58.58,0,0,1,3.54,3H10V8.61ZM14,8H11l0-5h3Z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p>REPLY</p>
+                                        </div>
+                                        {replyCheck(post.snippet.totalReplyCount)}
+                                    </div>
                                 </div>
-                                {replyCheck(post.snippet.totalReplyCount)}
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <div key={post.id}>
-                                <div>
-                                    <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
-                                    <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
-                                        post.snippet.topLevelComment.snippet.updatedAt)}
-                                    </p>
-                                </div>
-                                <p>{post.snippet.topLevelComment.snippet.textDisplay}</p>
-                                <div>
-                                    <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                        <g>
-                                            <path d="M12.42,14A1.54,1.54,0,0,0,14,12.87l1-4.24C15.12,7.76,15,7,14,7H10l1.48-3.54
-                                        A1.17,1.17,0,0,0,10.24,2a1.49,1.49,0,0,0-1.08.46
-                                        L5,7H1v7ZM9.89,3.14
-                                        A.48.48,0,0,1,10.24,3a.29.29,0,0,1,.23.09S9,6.61,9,6.61L8.46,8
-                                        H14c0,.08-1,4.65-1,4.65a.58.58,0,0,1-.58.35H6V7.39ZM2,8H5v5H2Z" >
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <p>{viewForm(post.snippet.topLevelComment.snippet.likeCount)}</p>
-                                    <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                        <g>
-                                            <path d="M3.54,2A1.55,1.55,0,0,0,2,3.13L1,7.37C.83,8.24,1,9,2,9
-                                        H6L4.52,12.54A1.17,1.17,0,0,0,5.71,14a1.49,1.49,0,0,0,1.09-.46
-                                        L11,9h4V2ZM6.07,12.86a.51.51,0,0,1-.36.14.28.28,0,0,1-.22-.09l0-.05L6.92,9.39,7.5,8H2a1.5,1.5,0,0,1,0-.41L3,3.35
-                                        A.58.58,0,0,1,3.54,3H10V8.61ZM14,8H11l0-5h3Z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <p>REPLY</p>
-                                </div>
-                                {replyCheck(post.snippet.totalReplyCount)}
-                            </div>
-                        )
+                            )
+                        }
+
                     }
-                }
-                )}
+                    )}
+                </div>
             </div>
         )
     }
@@ -202,9 +223,9 @@ const Comments = ({ vidId, total }: Props) => {
         )
     }
 
-    return  (
+    return (
         <>
-        {done && comm !== null ? hasComment() : noComment()}
+            {done && comm !== null ? hasComment() : noComment()}
         </>
     )
 }

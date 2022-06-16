@@ -58,3 +58,10 @@ export interface IVidId {
         videoId: string
     }
 }
+
+export interface ISidebar {
+    sideState: string,
+    setSide: React.Dispatch<React.SetStateAction<string>>
+    showSide: boolean,
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
+}

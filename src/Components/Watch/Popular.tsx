@@ -6,6 +6,7 @@ import { viewForm } from '../../Utils/numFormat'
 import vidDuration from '../../Utils/timeFormat'
 import ChIcon from '../VidData/ChannelIcon'
 import { IResponse } from '../../types/vid'
+import useWindowSize from '../../Hook/useWindowSize'
 
 const queries = {
     type: 'videos',
@@ -19,6 +20,7 @@ const queries = {
 
 const Popular = () => {
     const { data, done, loadMore, token, max, loading } = useLink(queries)
+    const {screen} = useWindowSize()
     const obs = useRef<IntersectionObserver | null>()
     const [list, setList] = useState<IResponse['items'] | null>(null)
     const [hasMore, setMore] = useState<boolean>(false)
@@ -60,6 +62,7 @@ const Popular = () => {
             setMore(false)
         }
     }, [list, done, max])
+    console.log(screen)
 
     const display = () => {
         if (list !== null) {
