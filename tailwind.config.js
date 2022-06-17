@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'content': '#f9f9f9',
+        'bars': '#212121',
         'lmBlue': '#065fd4'
       },
       fontSize: {

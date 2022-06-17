@@ -1,10 +1,10 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ISidebar } from '../../types/vid'
 import useWindowSize from '../../Hook/useWindowSize'
 
-const Header = ({ sideState, setSide}: ISidebar) => {
-    const {screen} = useWindowSize()
+const Header = ({ sideState, setSide }: ISidebar) => {
+    const { screen } = useWindowSize()
     let navigate = useNavigate()
     const [search, setSearch] = useState<string>('')
 
@@ -105,9 +105,9 @@ const Header = ({ sideState, setSide}: ISidebar) => {
     }
 
     return (
-        <div className='h-14 flex justify-between items-center mx-4'>
+        <div className={`h-14 flex justify-between items-center pl-4 pr-4 bg-bars ${screen < 800 ? `h-[${screen}px]` : ''}`}>
             <div className='flex gap-6'>
-                <div className='h-6 w-6' onClick={()=> sideBarState()}>
+                <div className='h-6 w-6 cursor-pointer' onClick={() => sideBarState()}>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                         <g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g>
                     </svg>
@@ -119,12 +119,12 @@ const Header = ({ sideState, setSide}: ISidebar) => {
                 </div>
             </div>
             <div>
-                <form onSubmit={(e) => submit(e)} className={`flex items-center ${screen > 800 ? 'h-8' : ''}`}>
+                <form onSubmit={(e) => submit(e)} className={`flex items-center h-8`}>
                     <label htmlFor='search'></label>
                     <input type='text' value={search} onChange={(e) => handleChange(e)} name='search' id='search'
-                        autoComplete='off' placeholder='Search' className={`border-2 border-black p-1 ${screen > 800 ? 'visible w-96' : 'invisible w-0'}`}>
+                        autoComplete='off' placeholder='Search' className={`border-2  bg-black border-black p-1 ${screen > 800 ? 'w-96' : 'w-20'}`}>
                     </input>
-                    <div className='flex bg-gray-100 h-9 w-12 items-center justify-center'>
+                    <div className='flex bg-black/25 h-9 w-12 items-center justify-center'>
                         <button className='h-6 w-6'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
                                 <g>

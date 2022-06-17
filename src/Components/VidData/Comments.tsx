@@ -74,7 +74,7 @@ const Comments = ({ vidId, total }: Props) => {
         if (count > 0) {
             return (
                 <div className='flex gap-1 text-lmBlue'>
-                    <div className='h-6 w-6'>
+                    <div className='h-6 w-6 cursor-pointer'>
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full fill-lmBlue'>
                             <g >
                                 <path d="M18,9l-6,6L6,9H18z" >
@@ -96,7 +96,7 @@ const Comments = ({ vidId, total }: Props) => {
     const commActions = (likeCount: number) => {
         return (
             <div className='flex items-center mt-2 mb-2 gap-2'>
-                <div className='h-4 w-4'>
+                <div className='h-4 w-4 cursor-pointer'>
                     <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                         <g>
                             <path d="M12.42,14A1.54,1.54,0,0,0,14,12.87l1-4.24C15.12,7.76,15,7,14,7H10l1.48-3.54
@@ -109,7 +109,7 @@ const Comments = ({ vidId, total }: Props) => {
                     </svg>
                 </div>
                 <p>{likeCount > 0 ? viewForm(likeCount) : ''}</p>
-                <div className='flex items-center'>
+                <div className='flex items-center cursor-pointer'>
                     <div className='h-4 w-4'>
                         <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                             <g>
@@ -132,7 +132,7 @@ const Comments = ({ vidId, total }: Props) => {
             <div>
                 <div className='flex gap-4'>
                     <p>{Number(total).toLocaleString()} Comments</p>
-                    <div className='flex'>
+                    <div className='flex cursor-pointer'>
                         <div className='h-4 w-4'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                                 <g>
@@ -151,7 +151,7 @@ const Comments = ({ vidId, total }: Props) => {
                         <input name='addComm' type='text' id='addComm' autoComplete='none' value={txt}
                             placeholder='Add a comment...' onChange={(e) => setTxt(e.target.value)} className='border-b border-black 
                             border-opacity-10 outline-none self-center w-full mr-2
-                            bg-content focus:border-opacity-100'></input>
+                            bg-black focus:border-white'></input>
                     </form>
                 </div>
                 <div className='flex flex-col gap-4'>
@@ -159,9 +159,11 @@ const Comments = ({ vidId, total }: Props) => {
                         if (comm.length === i + 1) {
                             return (
                                 <div key={post.id} ref={lastCommentRef} className='flex'>
-                                    <div>
-                                        <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-10 h-10 rounded-full mt-1 mr-4'></img>
-                                    </div>
+                                    <div className='pr-4'>
+                                        <div className='flex w-10 h-10'>
+                                            <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-full h-full rounded-full mt-1'></img>
+                                        </div>
+                                    </div> 
                                     <div>
                                         <div className='flex gap-1'>
                                             <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
@@ -169,7 +171,7 @@ const Comments = ({ vidId, total }: Props) => {
                                                 post.snippet.topLevelComment.snippet.updatedAt)}
                                             </p>
                                         </div>
-                                        <p>{post.snippet.topLevelComment.snippet.textDisplay}</p>
+                                        <p className=''>{post.snippet.topLevelComment.snippet.textDisplay}</p>
                                         {commActions(post.snippet.topLevelComment.snippet.likeCount)}
                                         {replyCheck(post.snippet.totalReplyCount)}
                                     </div>
@@ -178,8 +180,10 @@ const Comments = ({ vidId, total }: Props) => {
                         } else {
                             return (
                                 <div key={post.id} className='flex'>
-                                    <div>
-                                        <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-10 h-10 rounded-full mt-1 mr-4'></img>
+                                    <div className='pr-4'>
+                                        <div className='flex w-10 h-10'>
+                                            <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-full h-full rounded-full mt-1'></img>
+                                        </div>
                                     </div>
                                     <div>
                                         <div className='flex gap-1'>
@@ -204,8 +208,9 @@ const Comments = ({ vidId, total }: Props) => {
 
     const noComment = () => {
         return (
-            <div>
-                <p>Comments are turned off. Learn more</p>
+            <div className='flex gap-1'>
+                <p>Comments are turned off. </p>
+                <p className='text-lmBlue'>Learn more</p>
             </div>
         )
     }

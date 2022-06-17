@@ -12,6 +12,7 @@ import useWindowSize from '../../Hook/useWindowSize'
 const Vid = () => {
     const { screen } = useWindowSize()
     const [curVid, setCur] = useState<IResponse['items'] | null>(null)
+    const [descrip, setDescrip] = useState<boolean>(false)
     const vidId = useParams().id
     const query = {
         type: 'videos',
@@ -31,13 +32,21 @@ const Vid = () => {
         fetcher()
     }, [vidId])
 
+    const showDescrip = () => {
+        if (descrip === true) {
+            setDescrip(false)
+        } else {
+            setDescrip(true)
+        }
+    }
+
     return (
         <>
             {curVid !== null ? (
-                <div className='bg-content px-6 pt-6 flex w-full gap-6 justify-center'>
-                    <div className='max-w-7xl max-h-[720px]'>
+                <div className={`pr-6 pt-6 flex w-full gap-6  ${screen < 800 ? '' : 'justify-center'}`}>
+                    <div className={`${screen < 800 ? 'max-w-[480] max-h-[320px]' : 'max-w-7xl max-h-[720px]'}`}>
                         <div className='pb-[56.25%] overflow-hidden h-0 relative w-full'>
-                            <iframe 
+                            <iframe
                                 allow='autoplay'
                                 src={`https://www.youtube.com/embed/${vidId}?autoplay=1`}
                                 frameBorder="0" allowFullScreen className='left-0 top-0 h-full w-full absolute '>
@@ -52,7 +61,7 @@ const Vid = () => {
                                     <p>{datePosted(curVid[0].snippet.publishedAt)}</p>
                                 </div>
                                 <div className='flex text-sm gap-1'>
-                                    <div className='flex gap-2 items-center'>
+                                    <div className='flex gap-2 items-center cursor-pointer'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g>
@@ -67,7 +76,7 @@ const Vid = () => {
                                         </div>
                                         <p>{viewForm(curVid[0].statistics.likeCount)}</p>
                                     </div>
-                                    <div className='flex gap-2 items-center'>
+                                    <div className='flex gap-2 items-center cursor-pointer'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g >
@@ -82,7 +91,7 @@ const Vid = () => {
                                         </div>
                                         <p>DISLIKE</p>
                                     </div>
-                                    <div className='flex gap-2 items-center'>
+                                    <div className='flex gap-2 items-center cursor-pointer'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g mirror-in-rtl="">
@@ -94,7 +103,7 @@ const Vid = () => {
                                         </div>
                                         <p>SHARE</p>
                                     </div>
-                                    <div className='flex gap-2 items-center'>
+                                    <div className='flex gap-2 items-center cursor-pointer'>
                                         <div className='h-6 w-6'>
                                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                                 <g>
@@ -105,7 +114,7 @@ const Vid = () => {
                                         </div>
                                         <p>SAVE</p>
                                     </div>
-                                    <div className='h-6 w-6'>
+                                    <div className='h-6 w-6 cursor-pointer'>
                                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
                                             <g>
                                                 <path d="M7.5,12c0,0.83-0.67,1.5-1.5,1.5S4.5,12.83,4.5,12s0.67-1.5,1.5-1.5S7.5,11.17,7.5,12z 
@@ -123,11 +132,14 @@ const Vid = () => {
                                 <ChIcon chId={curVid[0].snippet.channelId} type='details' />
                                 <button type='button' className='bg-red-600 text-white px-4 py-2.5 text-sm self-center'>SUBSCRIBE</button>
                             </div>
-                            <p className='ml-16 max-w-[615px] break-all'>{curVid[0].snippet.description}</p>
+                            <p className={`ml-16 max-w-[615px] break-all 
+                                ${descrip ? '' : 'line-clamp-2 overflow-hidden text-ellipsis'}`}>
+                                {curVid[0].snippet.description}</p>
+                            <button type='button' onClick={() => showDescrip()} className='ml-16 border-none text-sm'>Show More</button>
                         </div>
                         {screen < 800 ?
-                            <div className='max-h-[1000px] overflow-hidden'>
-                                <Related vidId={curVid[0].id} />
+                            <div>
+                                    <Related vidId={curVid[0].id} />
                             </div>
                             :
                             null}

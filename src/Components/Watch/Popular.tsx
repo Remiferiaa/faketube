@@ -64,7 +64,7 @@ const Popular = () => {
     const display = () => {
         if (list !== null) {
             return (
-                <div className='pt-4 border-t border-black border-opacity-10 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4 bg-content'>
+                <div className='pt-4 border-t border-black border-opacity-10 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4'>
                     {list.map((item, i) => {
                         if (list.length === i + 1) {
                             return (

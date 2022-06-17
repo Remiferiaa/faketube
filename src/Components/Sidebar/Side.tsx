@@ -13,6 +13,9 @@ const Side = ({ sideState, setSide, showSide, setShow }: ISidebar) => {
             if (screen < 1300) {
                 setSide('coll')
             }
+            if (screen > 1300) {
+                setSide('full')
+            }
             if (screen < 800) {
                 setVisible(false)
             }
@@ -34,7 +37,7 @@ const Side = ({ sideState, setSide, showSide, setShow }: ISidebar) => {
     const side = () => {
         return (
             <>
-                <div className={`${visible ? 'visible' : 'invisible !w-0'} ${sideState}Side `}>
+                <div className={`${visible ? 'visible' : 'invisible !w-0'} ${sideState}Side bg-bars `}>
                     <div className={`${sideState}SideHolder`}>
                         <Link to='/' className={`${sideState}SideSVG`}>
                             <div className='h-6 w-6'>

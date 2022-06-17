@@ -83,7 +83,7 @@ const Result = () => {
     }, [location])
 
     return (
-        <div className='flex flex-col items-center font-light bg-content p-4 w-full'>
+        <div className='flex flex-col items-center font-light p-4 w-full'>
             <div className='flex flex-col gap-4 mt-4'>
                 <div className='flex justify-start pt-2 pb-2 border-b border-black border-opacity-10'>
                     <div className='h-6 w-6'>
