@@ -30,7 +30,7 @@ const Related = ({ vidId }: Props) => {
     }, [done, data])
 
     return (
-        <div className={`flex flex-col gap-2 ${ screen < 800 ? '' : 'max-w-[350px]'}`}>
+        <div className={`flex flex-col gap-4 ${ screen < 800 ? '' : 'max-w-[350px]'}`}>
             {related.length > 0 ? related.map((item) => {
                 return (
                     <div key={item.id.videoId} className='flex max-h-[90px] gap-1'>

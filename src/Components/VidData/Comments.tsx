@@ -3,6 +3,8 @@ import { IComment, IVidId } from '../../types/vid'
 import { viewForm } from '../../Utils/numFormat'
 import dateDiff from '../../Utils/dateFormat'
 import useLink from '../../Hook/useLink'
+import { login, auth, logOut } from '../../firebase'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 interface Props {
     vidId: string
@@ -15,6 +17,7 @@ const Comments = ({ vidId, total }: Props) => {
     const [comm, setComm] = useState<IComment['items'] | null>(null)
     const obs = useRef<IntersectionObserver | null>()
     const [hasMore, setMore] = useState<boolean>(false)
+    const [postComm, setPost] = useState<boolean>(false)
     const query = {
         type: 'commentThreads',
         params: {
@@ -24,7 +27,7 @@ const Comments = ({ vidId, total }: Props) => {
             prettyPrint: true
         }
     }
-    const { data, done, token, loadMore, loading } = useLink(query)
+    const { data, done, token, loadMore, loading, fetcher } = useLink(query)
 
     const moreQuery = {
         type: 'commentThreads',
@@ -51,6 +54,20 @@ const Comments = ({ vidId, total }: Props) => {
         [hasMore, loading]
     );
 
+    const stateChange = () => {
+        onAuthStateChanged(auth, (users) => {
+            if (users) {
+                setPost(true)
+            } else {
+                setPost(false)
+            }
+        })
+    }
+
+    useEffect(() => {
+        stateChange()
+    }, [])
+
     useEffect(() => {
         if (done)
             setComm(data)
@@ -61,6 +78,10 @@ const Comments = ({ vidId, total }: Props) => {
             setMore(true)
         }
     }, [token])
+
+    useEffect(() => {
+        fetcher()
+    }, [vidId])
 
     const commFormat = (pubAt: string, updateAt: string) => {
         if (pubAt !== updateAt) {
@@ -130,9 +151,9 @@ const Comments = ({ vidId, total }: Props) => {
     const hasComment = () => {
         return (
             <div>
-                <div className='flex gap-4'>
+                <div className='flex gap-4 mb-2'>
                     <p>{Number(total).toLocaleString()} Comments</p>
-                    <div className='flex cursor-pointer'>
+                    <div className='flex cursor-pointer items-center'>
                         <div className='h-4 w-4'>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                                 <g>
@@ -144,12 +165,15 @@ const Comments = ({ vidId, total }: Props) => {
                         <p>Sort By</p>
                     </div>
                 </div>
-                <div className='flex gap-1 mb-2'>
-                    <img src='https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj' alt="" className='w-10 h-10 rounded-full mt-1 mr-4'></img>
+                <div className='flex gap-1 mb-8 mt-8'>
+                    <img src={`${postComm ? auth.currentUser?.photoURL : 'https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj'}`}
+                        alt="" className='w-10 h-10 rounded-full mt-1 mr-4'></img>
                     <form onSubmit={(e) => fakeSubmit(e)} className='flex w-full'>
                         <label htmlFor='addComm'></label>
                         <input name='addComm' type='text' id='addComm' autoComplete='none' value={txt}
-                            placeholder='Add a comment...' onChange={(e) => setTxt(e.target.value)} className='border-b border-black 
+                            placeholder='Add a comment...' onChange={(e) => `${postComm ? setTxt(e.target.value) : ''}`}
+                            onClick={() => `${postComm ? '' : login()}`}
+                            className='border-b border-white 
                             border-opacity-10 outline-none self-center w-full mr-2
                             bg-black focus:border-white'></input>
                     </form>
@@ -163,7 +187,7 @@ const Comments = ({ vidId, total }: Props) => {
                                         <div className='flex w-10 h-10'>
                                             <img src={`${post.snippet.topLevelComment.snippet.authorProfileImageUrl}`} alt="" className='w-full h-full rounded-full mt-1'></img>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div>
                                         <div className='flex gap-1'>
                                             <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>

@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors: {
         'bars': '#212121',
-        'lmBlue': '#065fd4'
+        'lmBlue': '#3ea6ff',
+        'textCol': '#aaaaaa'
       },
       fontSize: {
         'mini': '0.5rem',

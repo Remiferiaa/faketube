@@ -64,22 +64,22 @@ const Popular = () => {
     const display = () => {
         if (list !== null) {
             return (
-                <div className='pt-4 border-t border-black border-opacity-10 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4'>
+                <div className='pt-4 border-t border-black border-opacity-10 grid grid-cols-[repeat(auto-fit,_300px)] w-full justify-center gap-4 gap-y-10'>
                     {list.map((item, i) => {
                         if (list.length === i + 1) {
                             return (
                                 <div key={item.id} ref={lastElementRef}>
                                     <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
                                         <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
                                                 <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
-                                                <p>{item.snippet.channelTitle}</p>
-                                                <div  className='flex items-center gap-1'>
+                                                <p className='text-textCol'>{item.snippet.channelTitle}</p>
+                                                <div className='flex items-center gap-1 text-textCol'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
@@ -94,15 +94,15 @@ const Popular = () => {
                                 <div key={item.id}>
                                     <Link to={`/watch/${item.id}`} className='relative'>
                                         <img src={`${item.snippet.thumbnails.medium.url}`} alt=""></img>
-                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold text-white p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
+                                        <p className='absolute right-1 bottom-1 bg-black text-xxs font-boldp-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
                                         <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
                                                 <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
-                                                <p>{item.snippet.channelTitle}</p>
-                                                <div  className='flex items-center gap-1'>
+                                                <p className='text-textCol'>{item.snippet.channelTitle}</p>
+                                                <div  className='flex items-center gap-1 text-textCol'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>

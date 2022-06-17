@@ -35,12 +35,16 @@ const ChIcon = ({ chId, type }: Props) => {
     }
 
     const [chData, setCh] = useState<ICh | null>(null)
-    const { rawData, done } = useLink(query)
+    const { rawData, done, fetcher } = useLink(query)
     useEffect(() => {
         if (done) {
             setCh(rawData)
         }
     }, [rawData, done])
+
+    useEffect(() => {
+        fetcher()
+    }, [chId])
 
     const subIcon = () => {
         return (
@@ -58,7 +62,7 @@ const ChIcon = ({ chId, type }: Props) => {
                 {chData !== null ?
                     <>
                         <img src={chData.items[0].snippet.thumbnails.medium.url} alt="" className='w-4 h-4 rounded-full mt-1 mr-1'></img>
-                        <p>{chData.items[0].snippet.title}</p>
+                        <p className='text-textCol'>{chData.items[0].snippet.title}</p>
                     </>
                     : null}
             </>
@@ -73,7 +77,7 @@ const ChIcon = ({ chId, type }: Props) => {
                         <img src={chData.items[0].snippet.thumbnails.medium.url} alt="" className='w-12 h-12 rounded-full mt-2 mr-4 mb-1'></img>
                         <div className='flex flex-col'>
                             <p className='text-sm font-bold'>{chData.items[0].snippet.title}</p>
-                            <p className='text-xs font-light'>{subForm(chData.items[0].statistics.subscriberCount)} subscribers</p>
+                            <p className='text-xs font-light text-textCol'>{subForm(chData.items[0].statistics.subscriberCount)} subscribers</p>
                         </div>
                     </div>
                     : null}

@@ -54,8 +54,8 @@ const Vid = () => {
                         </div>
                         <div className='mt-4'>
                             <h1 className='text-lg pb-4'>{curVid[0].snippet.title}</h1>
-                            <div className='flex justify-between border-b border-black border-opacity-10 mb-4 pb-4'>
-                                <div className='flex text-sm gap-1'>
+                            <div className='flex justify-between border-b border-white border-opacity-20 mb-4 pb-4'>
+                                <div className='flex text-sm text-textCol gap-1'>
                                     <p>{Number(curVid[0].statistics.viewCount).toLocaleString()} views</p>
                                     <p>·</p>
                                     <p>{datePosted(curVid[0].snippet.publishedAt)}</p>
@@ -127,7 +127,7 @@ const Vid = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex flex-col mb-4'>
+                        <div className='flex flex-col mb-4 pb-4 border-b border-white border-opacity-20'>
                             <div className='flex justify-between mt-1'>
                                 <ChIcon chId={curVid[0].snippet.channelId} type='details' />
                                 <button type='button' className='bg-red-600 text-white px-4 py-2.5 text-sm self-center'>SUBSCRIBE</button>
@@ -135,11 +135,11 @@ const Vid = () => {
                             <p className={`ml-16 max-w-[615px] break-all 
                                 ${descrip ? '' : 'line-clamp-2 overflow-hidden text-ellipsis'}`}>
                                 {curVid[0].snippet.description}</p>
-                            <button type='button' onClick={() => showDescrip()} className='ml-16 border-none text-sm'>Show More</button>
+                            <button type='button' onClick={() => showDescrip()} className='ml-16 pt-2 border-none text-sm text-start'>{descrip ? 'Show Less' : 'Show More'}</button>
                         </div>
                         {screen < 800 ?
                             <div>
-                                    <Related vidId={curVid[0].id} />
+                                <Related vidId={curVid[0].id} />
                             </div>
                             :
                             null}

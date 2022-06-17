@@ -95,7 +95,7 @@ const Result = () => {
                             </g>
                         </svg>
                     </div>
-                    <p className='font-bold'>FILTERS</p>
+                    <p className='font-bold text-textCol'>FILTERS</p>
                 </div>
                 {results.length > 0 ? results.map((item, i) => {
                     if (results.length === i + 1) {
