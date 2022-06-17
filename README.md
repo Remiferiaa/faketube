@@ -12,3 +12,6 @@ A project that was challenging but fun in the process. Let me know if theres any
 
 # Credits
 - All assets are taken from Youtube with their [API](https://developers.google.com/youtube/v3)
+
+# Sample 
+![img](./Sample.PNG)
