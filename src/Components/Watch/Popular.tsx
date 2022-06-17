@@ -74,12 +74,12 @@ const Popular = () => {
                                         <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold p-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-2'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
-                                                <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
-                                                <p className='text-textCol'>{item.snippet.channelTitle}</p>
-                                                <div className='flex items-center gap-1 text-textCol'>
+                                                <h1 className='line-clamp-2 pt-1 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
+                                                <p className='text-textCol pt-1'>{item.snippet.channelTitle}</p>
+                                                <div className='flex items-center gap-1 text-textCol pt-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
@@ -97,12 +97,12 @@ const Popular = () => {
                                         <p className='absolute right-1 bottom-1 bg-black text-xxs font-boldp-0.5'>{vidDuration(item.contentDetails.duration)}</p>
                                     </Link>
                                     <div>
-                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-1'>
+                                        <Link to={`/watch/${item.id}`}  className='flex gap-2 mt-2'>
                                             <ChIcon chId={item.snippet.channelId}/>
                                             <div className='text-xs'>
-                                                <h1 className='line-clamp-2 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
-                                                <p className='text-textCol'>{item.snippet.channelTitle}</p>
-                                                <div  className='flex items-center gap-1 text-textCol'>
+                                                <h1 className='line-clamp-2 pt-1 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
+                                                <p className='text-textCol pt-1'>{item.snippet.channelTitle}</p>
+                                                <div  className='flex items-center gap-1 text-textCol pt-1'>
                                                     <p>{viewForm(item.statistics.viewCount)}</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
