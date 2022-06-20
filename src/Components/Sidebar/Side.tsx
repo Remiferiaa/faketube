@@ -34,7 +34,6 @@ const Side = ({ sideState, setSide, showSide, setShow }: ISidebar) => {
             setVisible(true)
         }
     }, [location.pathname])
-    console.log(location.pathname)
 
     const side = () => {
         return (
