@@ -80,7 +80,7 @@ const Popular = () => {
                                                 <h1 className='line-clamp-2 pt-1 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
                                                 <p className='text-textCol pt-1'>{item.snippet.channelTitle}</p>
                                                 <div className='flex items-center gap-1 text-textCol pt-1'>
-                                                    <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>{viewForm(item.statistics.viewCount)} views</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
                                                 </div>
@@ -103,7 +103,7 @@ const Popular = () => {
                                                 <h1 className='line-clamp-2 pt-1 overflow-hidden whitespace-normal text-ellipsis font-bold text-sm max-h-[2.5rem]'>{item.snippet.title}</h1>
                                                 <p className='text-textCol pt-1'>{item.snippet.channelTitle}</p>
                                                 <div  className='flex items-center gap-1 text-textCol pt-1'>
-                                                    <p>{viewForm(item.statistics.viewCount)}</p>
+                                                    <p>{viewForm(item.statistics.viewCount)} views</p>
                                                     <p>·</p>
                                                     <p>{dateDiff(item.snippet.publishedAt)}</p>
                                                 </div>

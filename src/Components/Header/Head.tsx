@@ -201,7 +201,7 @@ const Header = ({ sideState, setSide }: ISidebar) => {
     }
 
     return (
-        <div className={`h-14 flex justify-between items-center pl-4 pr-4 bg-bars ${screen < 800 ? `h-[${screen}px]` : ''}`}>
+        <div className={`h-14 flex justify-between items-center pl-4 pr-4 bg-bars ${screen < 400 ? `w-[450px]` : ''}`}>
             <div className='flex gap-6'>
                 <div className='h-6 w-6 cursor-pointer' onClick={() => sideBarState()}>
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
