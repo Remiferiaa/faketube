@@ -97,7 +97,7 @@ const SideModal = ({ sideState, setSide}: ISidebar) => {
     const sideBarModal = () => {
         return (
             <>
-                <div className={`w-64 pt-4 pl-4 pb-4 bg-bars h-screen flex-col z-20 fixed top-0 duration-100 ${sideState === 'full' ? 'left-0 visible ' : '-left-full invisible'}`}>
+                <div className={`w-64 pt-4 pl-4 pb-4 bg-bars min-h-screen flex-col z-20 fixed top-0 duration-100 ${sideState === 'full' ? 'left-0 visible ' : '-left-full invisible'}`}>
                     <div className='flex gap-6 mb-4'>
                         <div className='h-6 w-6' onClick={() => sideBarState()}>
                             <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full'>
