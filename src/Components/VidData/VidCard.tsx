@@ -42,9 +42,9 @@ const VidCard = ({ vidId, status, descrip }: IVids) => {
                                 <img src={vid.items[0].snippet.thumbnails.medium.url} alt='' className={`${screen < 400 ? 'w-full h-full' : 'max-w-[320px]'}`}></img>
                                 <p className='absolute right-1 bottom-1 bg-black text-xxs font-bold p-0.5'>{vidDuration(vid.items[0].contentDetails.duration)}</p>
                             </Link>
-                            <div className={`${screen < 700 ? `max-w-[calc(100vw/3)] p-1`: 'max-w-2xl p-2'}`}> 
+                            <div className={`${screen < 700 ? `max-w-[calc(100vw/3)] p-1`: 'max-w-2xl py-2 pr-2 pl-4'}`}> 
                                 <Link to={`/watch/${vidId}`}>
-                                    <h1 className='font-normal line-clamp-2 overflow-hidden pb-1'>{vid.items[0].snippet.title}</h1>
+                                    <h1 className='font-normal text-lg line-clamp-2 overflow-hidden pb-1'>{vid.items[0].snippet.title}</h1>
                                     <div className='flex items-center gap-1 text-xs text-textCol whitespace-nowrap overflow-hidden py-1'>
                                         <p>{viewForm(vid.items[0].statistics.viewCount)}</p>
                                         <p>·</p>

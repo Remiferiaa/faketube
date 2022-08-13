@@ -62,7 +62,7 @@ const ChIcon = ({ chId, type }: Props) => {
                 {chData !== null ?
                     <>
                         <img src={chData.items[0].snippet.thumbnails.medium.url} alt="" className='w-4 h-4 rounded-full mt-1 mr-1'></img>
-                        <p className='text-textCol'>{chData.items[0].snippet.title}</p>
+                        <p className='text-textCol mt-1'>{chData.items[0].snippet.title}</p>
                     </>
                     : null}
             </>
