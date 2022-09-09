@@ -129,7 +129,7 @@ const Comments = ({ vidId, total }: Props) => {
                         </g>
                     </svg>
                 </div>
-                <p>{likeCount > 0 ? viewForm(likeCount) : ''}</p>
+                <p className='text-sm text-textCol'>{likeCount > 0 ? viewForm(likeCount) : ''}</p>
                 <div className='flex items-center cursor-pointer'>
                     <div className='h-4 w-4'>
                         <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" focusable="false" className='h-full w-full'>
@@ -142,7 +142,7 @@ const Comments = ({ vidId, total }: Props) => {
                             </g>
                         </svg>
                     </div>
-                    <p className='ml-4'>REPLY</p>
+                    <p className='ml-4 text-sm text-textCol'>REPLY</p>
                 </div>
             </div>
         )
@@ -189,9 +189,9 @@ const Comments = ({ vidId, total }: Props) => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className='flex gap-1'>
+                                        <div className='flex gap-1 items-center'>
                                             <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
-                                            <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
+                                            <p className='text-sm text-textCol'>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
                                                 post.snippet.topLevelComment.snippet.updatedAt)}
                                             </p>
                                         </div>
@@ -210,9 +210,9 @@ const Comments = ({ vidId, total }: Props) => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className='flex gap-1'>
+                                        <div className='flex gap-1 items-center'>
                                             <p>{post.snippet.topLevelComment.snippet.authorDisplayName}</p>
-                                            <p>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
+                                            <p className='text-sm text-textCol'>{commFormat(post.snippet.topLevelComment.snippet.publishedAt,
                                                 post.snippet.topLevelComment.snippet.updatedAt)}
                                             </p>
                                         </div>
