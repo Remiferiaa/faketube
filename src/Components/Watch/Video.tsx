@@ -132,7 +132,7 @@ const Vid = () => {
                                 <ChIcon chId={curVid[0].snippet.channelId} type='details' />
                                 <button type='button' className='bg-red-600 text-white px-4 py-2.5 text-sm self-center'>SUBSCRIBE</button>
                             </div>
-                            <p className={`ml-16 max-w-[615px] break-all 
+                            <p className={`ml-16 max-w-[615px] break-all whitespace-pre-line
                                 ${descrip ? '' : 'line-clamp-2 overflow-hidden text-ellipsis'}`}>
                                 {curVid[0].snippet.description}</p>
                             <button type='button' onClick={() => showDescrip()} className='ml-16 pt-2 border-none text-sm text-start'>{descrip ? 'Show Less' : 'Show More'}</button>
